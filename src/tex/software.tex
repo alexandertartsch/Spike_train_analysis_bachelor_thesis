@@ -1,5 +1,17 @@
 \chapter{Software}
 
+-Use-cases:\\
+	\null\quad-opening data (importing)\\
+	\null\quad-latency study (Alina)\\
+	\null\quad-chemical data study (Jessica)\\
+	\null\quad-mechanically evoked spike trains (Alexander)\\
+	\null\quad-experimental researchers (Barbara)\\
+-results in a list of requirements\\
+-Use-cases lead to software engineering approach\\
+-nessecary steps for my analysis\\
+-how I implemented it
+
+\begin{comment}
 My steps in analysis: 
 
 First, I used a jupyter notebook from Radomir. For this the data needed to be extracted from Spike2 directly in the Software. This export step leads to a single csv file for one recording with 5 channels: Time, Signal, Force, DigMark(stimulation events), Spikes 
@@ -7,5 +19,6 @@ First, I used a jupyter notebook from Radomir. For this the data needed to be ex
 Using the cev files I could extract the spike trains for each mechanical stimulation. The detection of the spike train worked as follows: The start of the spike train gets determined by the stimulation event. The length of the spike train is a previously set amount of time (in most cases 500ms). During this timeframe all spikes in the spike channel get put into a list that keeps track of the spike trains. This pretty basic detection of spike trains works well in this specific use case but has its limits when it comes to other kinds of data with other experimental protocols or just simply recordings without any protocols. Then because we do not have the exact starting points of the trains or bursting patterns this method of detection falls flat. 
 
 This first jupyter notebook already made use of what later became openMNGlab. The import of the data was handled by the software framework. However, openMNGlab got some updates soon after which made some significant changes to how the importers work. In the new and improved framework, the importer worked on the original Spike2 files instead of the extracted csv files. This allows for more detailed representation of the data since much of the information was lost in the extraction before this update. However, with this new way of importing the data the mechanical stimulation was not able to be extracted. I still needed the information of the mechanical stimulation which was only contained in the extracted csv file. For this reason, in my analysis from here on, I used a hybrid of the old and new versions of openMNGlab until I was able to fix the new importer to also include the mechanical stimulation channel. 
+\end{comment}
 
 \cleardoublepage
