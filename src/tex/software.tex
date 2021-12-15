@@ -11,12 +11,77 @@
 -nessecary steps for my analysis\\
 -how I implemented it
 
+Alina \\
+Works with spike2 data \\
+Electrical data and mechanical data \\
+Uses old way of importing currently (csv export from spike2) \\
+Needed channels from csv export: \\
+DigMark for electrical and mechanical stimulus events \\
+WaveMark channel for timestamps of spikes \\
+Information used: \\
+Electrical stimulus events + timestamps \\
+Calculate Latency for spikes (timestamps) \\
+Calculate Spike Count  \\
+In theory this information is available with the direct import of openMNGlab right now \\
+Potential problems with direct openMNGlab importer: \\
+Each template for spikes in spike2 results in separate channel in Neo structure after openMNGlab import -> needs some filtering (manual right now) \\
+Electrical and mechanical events share a channel (DigMark) and somehow need to be distinguished if the recording also features mechanical stimulation \\
+ 
+
+Alexander \\
+Works with spike2 data \\
+Electrical and mechanically stimulated data \\
+Uses a mixture of old and new importing currently \\
+Needed channels from csv export: \\
+Mechanical force channel \\
+Spike channel for timestamps of spikes \\
+Need channels from direct spike2 import: \\
+Electrical stimulus channel \\
+Information used: \\
+Electrical stimulus events + timestamps \\
+Mechanical stimulus events (duration, amplitude) + timestamps \\
+Timestamps for spikes in spike trains \\
+Potential problems with the Neo importer: \\
+Each template for spikes results in separate spike channels in the Neo structure -> this means that the filtered spikes in the spike2 spike channels (e.g., nw-1…) need to be bundled together again \\
+Mechanical force channel import does not work currently \\
+Electrical and mechanical events share a channel (DigMark) and somehow need to be distinguished \\
+After the import of the mechanical force channel, the mechanical stimuli need to be filtered as such (probably will not happen automatically by the importer) \\
+
+Jessica \\
+Works with spike2 data \\
+Chemical data \\
+Uses Neo importer \\
+Needed channels from import: \\
+Spike channels for spike timestamps \\
+Information used: \\
+Intervals which are relevant for the application of chemicals \\
+Spikes + timestamps inside those intervals \\
+Which chemicals are applied when \\
+Potential problems with openMNGlab importer: \\
+The chemical protocols are not automatically importable and readable; There is a channel in spike2 for comments where this information is given in theory, however, the notation of what is given and how much varies from comment to comment, and one needs a good understanding of the chemicals and potentially experimental procedure \\
+Comments channel is not being imported currently, even if the chemical notes where uniform; This means one must manually reed the comment channel in the spike2 software itself and manually choose some intervals which might be promising for observing chemically induced changes in spiking activity \\
+ 
+
+Which information should available after importing data? \\
+Spikes + timestamps \\
+Electrical stimulation + timestamps \\
+Mechanical stimulation + timestamps, duration, amplitude \\
+Information about application of other stimuli (chemicals, heat…) \\
+For human data: temperature?  
+
+Spike2 \\
+Spike channels + some way to group them easily (e.g., in groups from spike2 templates) \\
+Electrical event channel + some way to distinguish between electrical and mechanical events \\
+Mechanical force channel (maybe optional) \\
+Comments channel (maybe optional) \\
+Temperature (optional) (probably needed for human data) \\
+
 \begin{comment}
 My steps in analysis: 
 
 First, I used a jupyter notebook from Radomir. For this the data needed to be extracted from Spike2 directly in the Software. This export step leads to a single csv file for one recording with 5 channels: Time, Signal, Force, DigMark(stimulation events), Spikes 
 
-Using the cev files I could extract the spike trains for each mechanical stimulation. The detection of the spike train worked as follows: The start of the spike train gets determined by the stimulation event. The length of the spike train is a previously set amount of time (in most cases 500ms). During this timeframe all spikes in the spike channel get put into a list that keeps track of the spike trains. This pretty basic detection of spike trains works well in this specific use case but has its limits when it comes to other kinds of data with other experimental protocols or just simply recordings without any protocols. Then because we do not have the exact starting points of the trains or bursting patterns this method of detection falls flat. 
+Using the csv files I could extract the spike trains for each mechanical stimulation. The detection of the spike train worked as follows: The start of the spike train gets determined by the stimulation event. The length of the spike train is a previously set amount of time (in most cases 500ms). During this timeframe all spikes in the spike channel get put into a list that keeps track of the spike trains. This pretty basic detection of spike trains works well in this specific use case but has its limits when it comes to other kinds of data with other experimental protocols or just simply recordings without any protocols. Then because we do not have the exact starting points of the trains or bursting patterns this method of detection falls flat. 
 
 This first jupyter notebook already made use of what later became openMNGlab. The import of the data was handled by the software framework. However, openMNGlab got some updates soon after which made some significant changes to how the importers work. In the new and improved framework, the importer worked on the original Spike2 files instead of the extracted csv files. This allows for more detailed representation of the data since much of the information was lost in the extraction before this update. However, with this new way of importing the data the mechanical stimulation was not able to be extracted. I still needed the information of the mechanical stimulation which was only contained in the extracted csv file. For this reason, in my analysis from here on, I used a hybrid of the old and new versions of openMNGlab until I was able to fix the new importer to also include the mechanical stimulation channel. 
 \end{comment}

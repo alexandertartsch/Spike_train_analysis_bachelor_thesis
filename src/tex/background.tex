@@ -39,7 +39,8 @@ In the end FieldTrip and Elephant offer good solution for slightly different use
 
 
 \section{Data acquisition software} 
-There are many different data acquisition software packages for electrophysiological data. 
+A data acqusition system is a combination of software and hardware components that offer the ability to control and record physical aspects of something.%TODO: find better wording for this
+There are many different data acquisition systems for electrophysiological data. There are three systems that we are working with and that should be comaptible with our chosen software analysis framework. These systems are Spike2, Dapsys and OpenEphys.
 
 \subsection{Spike2}
 %“Spike2 is a multi-channel continuous data acquisition and analysis package”( https://ced.co.uk/products/spkovin) produced by Cambridge electronic design limited. \\
@@ -91,8 +92,9 @@ A more detailed view of a single spike train can be seen in Figure~\ref{fig:spik
 %-it gets harder to set up experimental protocols \\
 %-maybe it has something to do with newer windows updates \\
 %-that means this will probably not be used much in the future \\
+%http://www.dapsys.net/rd_article/rd_article.html
 
-The second data acquisiton package that openMNGlab needs to support is called Dapsys. It is a hardware and software system that can record and display data and has been mainly used for studying the peripheral nervous system (cite website here).\\
+The second data acquisiton package that openMNGlab needs to support is called Dapsys. It is a hardware and software system that can record and display data and has been mainly used for studying the peripheral nervous system (cite website here). It has been in development for over 30 years since its earliest version. \\
 Dapsys offers the capabilities of path tracking and comes with the benefit of much data being available from experiments conducted with the Dapsys software. It is used especially for mng-experiments with human patients. As is the case for Spike2 it also comes with a visual representation of the data which can be seen in Figure~(put ref to screenshot here).\\
 The data can also be imported by openMNGlab, however, unlike Spike2, where we can directly import the experimental file, we first need to do an extra step. We need to export the raw data and templates for the tracks we want to analyze as csv files from the Dapsys software.\\
 
