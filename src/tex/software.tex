@@ -11,6 +11,9 @@
 -nessecary steps for my analysis\\
 -how I implemented it
 
+
+
+\begin{comment}
 Alina \\
 Works with spike2 data \\
 Electrical data and mechanical data \\
@@ -26,8 +29,12 @@ In theory this information is available with the direct import of openMNGlab rig
 Potential problems with direct openMNGlab importer: \\
 Each template for spikes in spike2 results in separate channel in Neo structure after openMNGlab import -> needs some filtering (manual right now) \\
 Electrical and mechanical events share a channel (DigMark) and somehow need to be distinguished if the recording also features mechanical stimulation \\
- 
+\end{comment}
 
+The first user is a student who does data analysis on mechanically and electrically stimulated Spike2 data. The goal is to perform latency analysis for spikes.  The raw spike2 files feature a lot of information, not all of which is always needed. In this case, all that is required to analyse the latencies of the spikes are the timestamps of the spikes itself and the timestamps of the stimulation events. For the Spike2 software this means that we need to extract the DigMark channel which contains the event information as well as the wavemark channel which contains the information on the already presorted spikes.\\
+The relevant information can be imported using the importing function of openMNGlab. 
+ 
+\begin{comment}
 Alexander \\
 Works with spike2 data \\
 Electrical and mechanically stimulated data \\
@@ -46,7 +53,11 @@ Each template for spikes results in separate spike channels in the Neo structure
 Mechanical force channel import does not work currently \\
 Electrical and mechanical events share a channel (DigMark) and somehow need to be distinguished \\
 After the import of the mechanical force channel, the mechanical stimuli need to be filtered as such (probably will not happen automatically by the importer) \\
+\end{comment}
 
+The second user is also a student who uses mechanically and electrically stimulated Spike2 data. His goal is to analyse spike trains resulting from mechanical stimulation. For this he needs also does not need all of the information contained in the raw Spike2 file. He needs the event information for mechanical and electrical stimuli as well as the mechanical force information for details of the mechanical stimuli. As well as the first user he also needs the information collected from the wavemark channels detailing the exact spiking patterns.
+
+\begin{comment}
 Jessica \\
 Works with spike2 data \\
 Chemical data \\
@@ -60,6 +71,7 @@ Which chemicals are applied when \\
 Potential problems with openMNGlab importer: \\
 The chemical protocols are not automatically importable and readable; There is a channel in spike2 for comments where this information is given in theory, however, the notation of what is given and how much varies from comment to comment, and one needs a good understanding of the chemicals and potentially experimental procedure \\
 Comments channel is not being imported currently, even if the chemical notes where uniform; This means one must manually reed the comment channel in the spike2 software itself and manually choose some intervals which might be promising for observing chemically induced changes in spiking activity \\
+\end{comment}
  
 
 Which information should available after importing data? \\
