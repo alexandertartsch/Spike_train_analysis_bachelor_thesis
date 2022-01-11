@@ -16,9 +16,17 @@
 When it comes to analysis software for microneurography data,  there are multiple available that each have their own use-cases.
 
 \subsection{FieldTrip}
-Fieldtrip (fieldtriptoolboX.org) is a software developed at the Radboud University,  Nijmegen,  the Netherlands and offers a wide variety of analysis functions.  It can analyze MEG, EEG, and other electrophysiological data.
+Fieldtrip (fieldtriptoolboX.org) is a MATLAB toolbox developed at the Radboud University,  Nijmegen,  the Netherlands and offers a wide variety of analysis functions.  It can analyse MEG, EEG, and iEEG and is an open-source software that has been in development since 2003. Its main strengths lie in the analysis of non-invasive and invasive electrophysiological data. It provides over 100 high-level and 800 low-level functions that can be used both by experimental users as well as developers. It does not feature a graphical user interface, but instead focused on providing direct access to the high and low-level analysis functions that can be used in the command line or in scripts.  This is done because FieldTrip is not meant to be an application but a set of tools that can be mixed and matched for different requirements.
+With this approach the user either needs to be somewhat familiar with MATLAB before starting their analysis, but after a potential initial time invest the flexibility of this approach yields great advantages.
+The analysis functions are meant to be combined and used as a sort of analysis protocol, where the output of functions is used to compute the next results. 
 
-The main problem with this software is its programming language. It is a MATLAB toolbox, however it would be preferred to use a software package in python or another programming language that slots better in the already existing structure within the chair for medical informatics. In addition to that it is not only speficied for spike trains software, dealing with MEG, EEG and iEEG analysis. 
+%potential things to add:
+%example pipeline
+%list of features
+
+
+This software package is very useful and widely used in the field, however it does not lend itself to our specific needs.
+The main problem with this software is its programming language. It is a MATLAB toolbox, however it would be preferred to use a software package in python or another programming language that slots better in the already existing structure that is used at the chair for medical informatics.  
 
 \subsection{Elephant}
 Elephant (https://elephant.readthedocs.io/en/latest/index.html) is a python module which offers some high-level analysis functions for spike trains specifically.  The main problem with this software is the lack of basic functionalities.  It relies more on highly specified analysis tools that are not necessarily viable in our use-case.  For the use in this thesis I want to start with the basic signal from the spikes, try out different quantifiers and look at the data from a fresh perspective. 
@@ -45,8 +53,8 @@ importers or at least templates for importers
 
 
 \section{Data acquisition software} 
-A data acqusition system is a combination of software and hardware components that offer the ability to control and record physical aspects of something.%TODO: find better wording for this
-There are many different data acquisition systems for electrophysiological data. There are three systems that we are working with and that should be comaptible with our chosen software analysis framework. These systems are Spike2, Dapsys and OpenEphys.
+A data acquisition system is a combination of software and hardware components that work together in order to control inputs towards and record data from different subjects.
+There are many different data acquisition systems for electrophysiological data. There are three systems that we are working with and that should be compatible with our chosen software analysis framework. These systems are Spike2, Dapsys and OpenEphys.
 
 \subsection{Spike2}
 %“Spike2 is a multi-channel continuous data acquisition and analysis package”( https://ced.co.uk/products/spkovin) produced by Cambridge electronic design limited. \\
@@ -65,8 +73,6 @@ There are many different data acquisition systems for electrophysiological data.
 %-has direct importer in openMNGlab \\
 
 Spike2 is a data acquisition and analysis software produced by Cambridge electronic design limited. It is a flexible tool that can be used in a variety of different ways.
-
-TODO: go into detail\\
 
 \begin{figure}
 	\includegraphics[width = \textwidth]{src/pic/Spike2_screenshot}
@@ -111,8 +117,20 @@ The data can also be imported by openMNGlab, however, unlike Spike2, where we ca
 %-open-source electrophysiology \\
 %-based in Cambridge, Massachusetts \\
 %-Used in experiments in Bristol cooperation \\
-OpenEphys is an open-source electrophysiology data acqusition software from a nonprofit based in Cambridge, Massachusetts. Its aim is that in the future neuroscientists can choose the right tool for their job and that there are many tools available. This is best accomplished by providing open-source solutions.
-OpenEphys is used by one of the collaborators of IMI in Bristol.
+%OpenEphys is an open-source electrophysiology data acqusition software from a nonprofit based in Cambridge, Massachusetts. Its aim is that in the future neuroscientists can choose the right tool for their job and that there are many tools available. This is best accomplished by providing open-source solutions.\\
+%They provide a platform where researchers can individually choose their own experimental setup from a number of different open-souce and other components.
+%OpenEphys is used by one of the collaborators of IMI in Bristol.
+
+The last data acquisition system I want to focus on is called OpenEphys. It is an open-source electrophysiology data acquisition system originally developed by a nonprofit based in Cambridge, Massachusetts. It sets a big focus on modularity and flexibility so that it can fit many different needs from a variety of users.\\
+
+The idea behind OpenEphys came after an increased popularity of closed-loop experiments in neuroscience, in which the results of the recorded system has an influence on the system itself. With proprietary systems it is somewhat difficult to share the details of such experiments and to replicate them. The introduction of OpenEphys, an open-source system is supposed to make it easier to develop and share analysis and details of such closed-loop experiments.\\
+OpenEphys makes use of inexpensive open-source hardware such as Intan chips to make it easier for small labs to get started with analysing electrophysiological data. The heart of the software part of the system is a plugin-based graphical user interface (GUI). Here the user can add different modules to the processing pipeline such as modules for communicating with the hardware or modules for analyzing the data.\\
+Different labs often have widely varying sets of requirements towards data analysis and therefore data acquisition systems. At the start of a project they are confronted with the question of whether to use a proprietary system or develop their own systems, which will result in much more effort before the real work can begin. Proprietary systems also often come with very limited customization possibilities, which makes it harder to get the system that fits the users needs exactly. This is where OpenEphys comes in with its plugin-based software. It is designed so that everyone can mix and match the processing modules and end up with the exact analysis pipeline that they require. In addition to a wide array of already available processing modules, it is possible to develop your own modules that fit seamlessly into the structure of the system. OpenEphys is completely developed in C++ and based on a library for audio applications. This makes it easy to develop new modules by making use of the class inheritance capabilities of C++.\\
+OpenEphys comes with many advantages such as low cost, transparency and flexibility due to the modularity, but there are also drawbacks to using the system. The start is also a little harder than in proprietary systems, where there is often a straight forward way of getting started with your first experiments. The modular nature of the system might also effect the performance of the analysis, which is why commercial systems might be a better choice, if they fit the analysis needs.\\
+
+In this thesis we are considering OpenEphys because it is used by a collaborating research team in Bristol, which also wants to make use of openMNGlab.
+
+
 
  
 \cleardoublepage
