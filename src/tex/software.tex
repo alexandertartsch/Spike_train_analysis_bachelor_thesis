@@ -11,8 +11,26 @@
 -nessecary steps for my analysis\\
 -how I implemented it
 
+To begin this section I want to present a couple different use-cases of various users of openMNGlab. I will describe the specifics of each use-case and then give a few remarks on the current state of openMNGlab and the potential improvements necessary for a smoother experience for all users.
+
+One important feature of openMNGlab that is needed in every use-case is the importing of new data. For new users it is important to be able to load sample data sets and get a feel for the framework by getting to know a few test analysis functions. For students or experimental researchers it is key to be able to load multiple files for a quick overview or even full analysis.\\
+Because we are dealing with a couple of different sources when it comes to experimental data, which all need to be handled in a different way, this is where many issues can occur. When going through the use-cases we will see where already we encounter some difficulties regarding the data import.
 
 
+
+\begin{comment}
+-spike2 does some automatic spike filtering
+-This results in up to 20 different classes of spikes in one recording
+-not all of these, however, are in fact coming from different sources
+-experimental researchers have already done their own filtering with their expertise, in order to combine various different of the spike2 classified spikes into larger groups and put them in so called wavemark channels.
+-previously one could export these wavemark channels to csv files and inport those into the framework
+-with the direct importer from the smr files, however, this is no longer possible
+-what we receive after a successful import of an smr recording file are the original spike2 classified spikes in different channels
+-if one were to know which of these belong together one could easily combine those together as in spike2 with the wavemark channels
+-but the information of the wavemark channels is lost during the import and so one has to manually search for the correct channels first and then combine them into groups by hand
+\end{comment}
+
+\subsection{Student 1}
 \begin{comment}
 Alina \\
 Works with spike2 data \\
@@ -31,9 +49,15 @@ Each template for spikes in spike2 results in separate channel in Neo structure 
 Electrical and mechanical events share a channel (DigMark) and somehow need to be distinguished if the recording also features mechanical stimulation \\
 \end{comment}
 
-The first user is a student who does data analysis on mechanically and electrically stimulated Spike2 data. The goal is to perform latency analysis for spikes.  The raw spike2 files feature a lot of information, not all of which is always needed. In this case, all that is required to analyse the latencies of the spikes are the timestamps of the spikes itself and the timestamps of the stimulation events. For the Spike2 software this means that we need to extract the DigMark channel which contains the event information as well as the wavemark channel which contains the information on the already presorted spikes.\\
+The first user is a student who does data analysis on mechanically and electrically stimulated Spike2 data. The goal is to perform latency analysis for spikes.  The raw spike2 files feature a lot of information, not all of which is always needed. In this case, all that is required to analyse the latencies of the spikes are the timestamps of the spikes itself and the timestamps of the stimulation events. For the Spike2 software this means that we need to extract the DigMark channel which contains the event information as well as the corresponding wavemark channel which contains the information on the already presorted spikes.\\
 The relevant information can be imported using the importing function of openMNGlab. 
+The data is then used to calculate the latency for the spikes corresponding to the latest electrical stimulus event as well as calculating the spike count.
+
+Potential problems: The student started the analysis before the framework was working properly and therefore uses their own custom analysis notebook. However, all the information that is required is also available with the regular Spike2 importer in the current openMNGlab version.
+In recordings with both electrical and mechanical stimuli, the event markers for those stimuli share the same channel in Spike2. Although they can be distinguished in Spike2 itself, the imported channel in the Neo format does not distinguish between different event types. This needs to be addressed if we want to work with recordings that feature multiple types of stimulation.
+Additionally there might be some general import difficulties which I will elaborate on later in this section.
  
+\subsection{Student 2}
 \begin{comment}
 Alexander \\
 Works with spike2 data \\
@@ -55,8 +79,14 @@ Electrical and mechanical events share a channel (DigMark) and somehow need to b
 After the import of the mechanical force channel, the mechanical stimuli need to be filtered as such (probably will not happen automatically by the importer) \\
 \end{comment}
 
-The second user is also a student who uses mechanically and electrically stimulated Spike2 data. His goal is to analyse spike trains resulting from mechanical stimulation. For this he needs also does not need all of the information contained in the raw Spike2 file. He needs the event information for mechanical and electrical stimuli as well as the mechanical force information for details of the mechanical stimuli. As well as the first user he also needs the information collected from the wavemark channels detailing the exact spiking patterns.
+The second user is also a student who uses mechanically and electrically stimulated Spike2 data. Their goal is to analyse spike trains resulting from mechanical stimulation. For this they do not need all of the information contained in the raw Spike2 file. They need the event information for mechanical and electrical stimuli as well as the mechanical force information for details of the mechanical stimuli. The event information can be found in the DigMark channel of the Spike2 file and gets extracted by the Spike2 importer of openMNGlab. The mechanical force is a continual signal but appears in the form of sin shapes when the nerve is stimulated.
+Just as the first user they also need the information regarding the spikes themselves, which are also imported by the framework.\\
+From the gathered data the user then calculates various quantifiers for the mechanically induced spike trains such as spike count or more elaborate features. The user started this project while still using the old framework version where the channels from the Spike2 software were manually extracted to a csv file. With the updates to the framework in the meantime not all of the required information gets extracted as easily as before. This is why they use a hybrid version of the two versions of the framework where they mix and match the functions as they need them.
+%it is probably clear that this user is me. Should I just say so?
 
+Potential problems: There are similar potential problems when it comes to the event channels and regular spike channels as in the case of the first user. Additionally there are problems when it comes to the import of the mechanical force. The user started the analysis with an old version of the framework which used other importers (csv files). With this technique they could extract the mechanical force throughout the recordings. The new Neo importer still has some bugs when it comes to importing the mechanical force from the Spike2 file, which requires fixing for future users who need this information.
+
+\subsection{Student 3}
 \begin{comment}
 Jessica \\
 Works with spike2 data \\
@@ -72,8 +102,13 @@ Potential problems with openMNGlab importer: \\
 The chemical protocols are not automatically importable and readable; There is a channel in spike2 for comments where this information is given in theory, however, the notation of what is given and how much varies from comment to comment, and one needs a good understanding of the chemicals and potentially experimental procedure \\
 Comments channel is not being imported currently, even if the chemical notes where uniform; This means one must manually reed the comment channel in the spike2 software itself and manually choose some intervals which might be promising for observing chemically induced changes in spiking activity \\
 \end{comment}
- 
 
+The third student user of the framework works on a project to analyse Spike2 data in which certain chemicals where applied to the test subject. In contrast to the other two users, this user started with the project when the current version of openMNGlab with the integration of the Neo module already in place. This means they only made use of the new importing functions and are not stuck with certain parts from the old framework. In addition to the spiking activity, as in the previous use-cases, they also need information regarding the chemicals that are applied. They need the timings and doses of the specific chemicals. From this they need to specify a time frame where they want to monitor the spiking activity that results from the application of the chemicals.\\
+
+Potential problems: The analysis of chemically stimulated data does bring with it its own new set of problems. There is no dedicated channel for chemical information in the Spike2 software. For this reason the chemical protocols are given in the general comment channel in Spike2. That means that the experimenter manually creates a comment everytime a new chemical is applied. The issue with this is that openMNGlab does not import the comment channel. In practice the comments do not have a strict naming scheme, which would also lead to difficulties with the automatic detection of specifics regarding the chemicals. This is a problem however that does not stem from the framework, but is something that has to be adressed on the side of the experimetnal researchers.\\
+These described problems lead to the current workflow of manually selecting a suitable timeframe for interesting spiking activity some time after the chemical applicaton; some times up to a minute (check the times again) after the chemicals where applied.
+ 
+\begin{comment}
 Which information should available after importing data? \\
 Spikes + timestamps \\
 Electrical stimulation + timestamps \\
@@ -87,6 +122,7 @@ Electrical event channel + some way to distinguish between electrical and mechan
 Mechanical force channel (maybe optional) \\
 Comments channel (maybe optional) \\
 Temperature (optional) (probably needed for human data) \\
+\end{comment}
 
 \begin{comment}
 My steps in analysis: 
