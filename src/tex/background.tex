@@ -111,7 +111,12 @@ A more detailed view of a single spike train can be seen in Figure~\ref{fig:spik
 %http://www.dapsys.net/rd_article/rd_article.html
 
 The second data acquisiton package that openMNGlab needs to support is called Dapsys. It is a hardware and software system that can record and analyse electrophysiological data from animal or human sources and has been mainly used for studying the peripheral nervous system (cite website here). It has been in development for over 30 years since its earliest version and thus has a great history of usage in the field. The idea behind the conception was to build a system that could control stimulators and simultaneously acquire the data in real-time and display the data (cite the article).\\
-Dapsys offers the capabilities of path tracking and comes with the benefit of much data being available from experiments conducted with the Dapsys software. It is used especially for electrophysiological recordings with human patients. As is the case for Spike2 it also comes with a visual representation of the data which can be seen in Figure~(put ref to screenshot here). This graphical interface works real time while recording the data.\\
+Dapsys offers the capabilities of path tracking and comes with the benefit of much data being available from experiments conducted with the Dapsys software. It is used especially for electrophysiological recordings with human patients. As is the case for Spike2 it also comes with a visual representation of the data which can be seen in Figure~\ref(dapsys). This graphical interface works real time while recording the data.\\
+\begin{figure}
+	\includegraphics[width = \textwidth]{src/pic/Dapsys_sc}
+	\caption{Screenshot of a recording in Dapsys}
+	\label{fig:dapsys}
+\end{figure}
 The version of Dapsys used in the experiments from Barbara Namer is specialized for microneurography and was configured in cooperation with Brian Turnquist.\\
 OpenMNGlab already features an importer for Dapsys recordings, which makes many experiments conducted with this system readily available for analysis.
 The difference to Spike2 however, is that the importer does need an extra step from the user, since it does not import the raw Dapsys files. We need to export the raw data and templates for the tracks we want to analyse as csv files from the Dapsys software, before we can import them into openMNGlab. This process is especially combersome when dealing with a larger number of recordings. In the future the importer functionality of openMNGlab should be improved, so that it works on the raw Dapsys files in order to make the analysis workflow easier.\\
