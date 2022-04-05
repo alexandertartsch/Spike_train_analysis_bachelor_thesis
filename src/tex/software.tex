@@ -1,5 +1,47 @@
 \chapter{Software}
+%not sure if use-cases should not go into a different chapter\\
+%this chapter would then focus on just the process of developing my analysis pipeline and finish with a detailed description of it.
 
+\begin{comment}
+TODO:\\
+-Add what I did: somewhat detailed description of my process in developing the notebook\\
+-start from the notebook which was started by Radomir for custom structure (before openMNGlab)\\
+-adding of importers from old openMNGlab version (code from Fabian)\\
+-adding of neo importers after integration into openMNGlab\\
+
+-Explain the details of the different structures in python (recording from old version, neo recording/block/segment, csv files)\\
+-add diagram of big picture structure of openMNGlab in greater spike data analysis pipeline\\
+\end{comment}
+
+\section{Data structure}
+In this section I will present the details of the different data structures that I will use in the course of my analysis pipeline.
+
+\subsection{Neo structure}
+Neo models electrophysiological data in a hierarchical structure, which is depicted in Figure~\ref{fig:neostructure}. On the lowermost level we start with data objects. An AnalogSignal is regularly sampled data and can contain multiple channels. An IrregularlySampledSignal is similar, but does not feature a regular sampling interval, as the name suggests. A SpikeTrain object contains time point data with th information when action potentials occur. These SpikeTrain objects are, however, slightly different from our understanding of spike trains in this thesis. We understand a spike train as the spikes that occur resulting from one stimulus and is quite limited duration wise. The SpikeTrain object in the Neo structure is a collection of all spikes during one recording and all spike trains as we see them would be contained in one such SpikeTrain object.\\
+Events in Neo point to distinct points in time and can be used to mark stimulation events for experiments with animals for example. Epochs function similar to events, but cover a duration instead of just points in time.\\
+On the next layer up there are objects for grouping all of these lower level objects. The first of these objects is a Segment. This groups data that was simultaneously recorded. Then there are so called Groups which can group data in any arbitrary way and is not restricted to the data being  in the same Segment. On the topmost layer there are Blocks. One block contains multiple Segments and Groups which in turn contain multiple data objects.\\
+
+In case of this Bachelor thesis we are dealing with recording files from animal experiments. When importing one such file, the resulting Neo structure looks as follows: On the top level each file contains a block. In our case these blocks contain only one segment, since the recordings feature a single continuous signal without interruptions.
+
+\begin{figure}
+	\includegraphics[width = \textwidth]{src/pic/neo_structure}
+	\caption{Structure of Neos hierarchical model for electrophysiological data.}
+	\label{fig:neostructure}
+\end{figure}
+
+\subsection{Custom Structure}
+Part of my analysis is still using code from version 1 from openMNGlab where the Neo structure was not yet integrated. The importer from that version delivered the data in a custom data structure.\\
+At its core the custom data structure models the data hierarchically, but the objects look a little different from the ones from Neo. At the base level there are data objects "ActionPotential", "MechanicalStimulus", "ElectricalStimulus" containing information corresponding to their respective names. These objects are all part of an overlying object type called $signal_artifact$.\\
+On the top level we get an object called "recording" when importing data with this method. one such $recording$ then contains the lists $el_stimuli$, $mech_stimuli$, $actpots$ which are lists containing objects of types $ElectricalStimulus$, $MechanicalStimulus$ and $ActionPotential$ respectively. Additionally there is a $raw_signal$ object which contains the raw signal in the form of arrays.
+
+\section{Development Process}
+The basis of my analysis notebook started with the work of Radomir Popovich, who also worked with spike train data for IMI. He had developed a jupyter notebook based on a custom import of spike train data extracted from the Spike2 software. From this he extracted the spike trains and created figures such as event plots(TODO: add event plot figure). These event plots depict the spike trains of a single recording. Each row contains the time point data of spikes for one spike train. The x axis represents the time since the last mechanical stimulus starting at 0. These figures give a good overview with one glance over the spiking sctivity during mechanical stimulation for recordings.
+
+\section{Finished analysis pipeline}
+The software development described in the previous chapter resulted in a single jupyter notebook, which represents the current analysis pipeline for this thesis. A schematic version of this pipeline can be seen in figure TODO. The import of the data consists of two separate importing steps. We need to import two files for each data set that contain the information in a slightly different way. 
+The first file is the original recording file for spike2. 
+
+\begin{comment}
 -Use-cases:\\
 	\null\quad-opening data (importing)\\
 	\null\quad-latency study (Alina)\\
@@ -10,11 +52,13 @@
 -Use-cases lead to software engineering approach\\
 -nessecary steps for my analysis\\
 -how I implemented it
+\end{comment}
 
-To begin this section I want to present a couple different use-cases of various users of openMNGlab. I will describe the specifics of each use-case and then give a few remarks on the current state of openMNGlab and the potential improvements necessary for a smoother experience for all users.
+\section{Use Cases}
+To end this chapter I want to present a couple different use cases of various users of openMNGlab. I will describe the specifics of each use case and then give a few remarks on the current state of openMNGlab and the potential improvements necessary for a smoother experience for all users.
 
 One important feature of openMNGlab that is needed in every use-case is the importing of new data. For new users it is important to be able to load sample data sets and get a feel for the framework by getting to know a few test analysis functions. For students or experimental researchers it is key to be able to load multiple files for a quick overview or even full analysis.\\
-Because we are dealing with a couple of different sources when it comes to experimental data, which all need to be handled in a different way, this is where many issues can occur. When going through the use-cases we will see where already we encounter some difficulties regarding the data import.
+Because we are dealing with a couple of different sources when it comes to experimental data, which all need to be handled in a different way, this is where many issues can occur. When going through the use cases we will see where already we encounter some difficulties regarding the data import.
 
 
 
@@ -105,8 +149,13 @@ Comments channel is not being imported currently, even if the chemical notes whe
 
 The third student user of the framework works on a project to analyse Spike2 data in which certain chemicals where applied to the test subject. In contrast to the other two users, this user started with the project when the current version of openMNGlab with the integration of the Neo module already in place. This means they only made use of the new importing functions and are not stuck with certain parts from the old framework. In addition to the spiking activity, as in the previous use-cases, they also need information regarding the chemicals that are applied. They need the timings and doses of the specific chemicals. From this they need to specify a time frame where they want to monitor the spiking activity that results from the application of the chemicals.\\
 
-Potential problems: The analysis of chemically stimulated data does bring with it its own new set of problems. There is no dedicated channel for chemical information in the Spike2 software. For this reason the chemical protocols are given in the general comment channel in Spike2. That means that the experimenter manually creates a comment everytime a new chemical is applied. The issue with this is that openMNGlab does not import the comment channel. In practice the comments do not have a strict naming scheme, which would also lead to difficulties with the automatic detection of specifics regarding the chemicals. This is a problem however that does not stem from the framework, but is something that has to be adressed on the side of the experimetnal researchers.\\
-These described problems lead to the current workflow of manually selecting a suitable timeframe for interesting spiking activity some time after the chemical applicaton; some times up to a minute (check the times again) after the chemicals where applied.
+Potential problems: The analysis of chemically stimulated data does bring with it its own new set of problems. There is no dedicated channel for chemical information in the Spike2 software. For this reason the chemical protocols are given in the general comment channel in Spike2. That means that the experimenter manually creates a comment every time a new chemical is applied. The issue with this is that openMNGlab does not import the comment channel. In practice the comments do not have a strict naming scheme, which would also lead to difficulties with the automatic detection of specifics regarding the chemicals. This is a problem however that does not stem from the framework, but is something that has to be addressed on the side of the experimental researchers.\\
+These described problems lead to the current workflow of manually selecting a suitable time frame for interesting spiking activity some time after the chemical application; some times up to a minute (check the times again) after the chemicals where applied.
+
+\subsection{Experimental researcher}
+Another big group of potential users for openMNGlab are experimental researchers who produce and work with electrophysiological and microneurographical data often. They will be a big part of the user base of the framework because of the nature of their work. For them it is important that the new data sets can be easily and quickly loaded and overview statistics can be displayed.
+
+
  
 \begin{comment}
 Which information should available after importing data? \\
