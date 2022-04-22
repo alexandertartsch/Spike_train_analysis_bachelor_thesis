@@ -65,6 +65,8 @@
 
 \newcommand{\emptyLine}{{\LARGE ~\\}}
 
+\setcounter{tocdepth}{2}  %table of contents depth
+
 \begin{document}
 
 % Einrücken von Absätzen verhindern und 1.5 Zeilen Absatzabstand
@@ -83,7 +85,7 @@
 
 %\clearpage
 
-\input{src/tex/abstract}
+\input{src/tex/abstract.tex}
 
 \tableofcontents
 
@@ -93,21 +95,23 @@
 \setcounter{page}{1}
 \pagenumbering{arabic}
 
-\input{src/tex/intro}
+\input{src/tex/intro.tex}
 
-\input{src/tex/data}
+\input{src/tex/background.tex}
 
-\input{src/tex/background}
+\input{src/tex/methods.tex}
 
-\input{src/tex/software}
+\input{src/tex/results.tex}
 
-\input{src/tex/analysis}
+%\input{src/tex/software.tex}
 
-\input{src/tex/discussion}
+%\input{src/tex/analysis.tex}
+
+\input{src/tex/discussion.tex}
 
 %\input{src/tex/listings}
 
-\input{src/tex/conclusion}
+\input{src/tex/conclusion.tex}
 
 \bibliographystyle{alpha}
 \addcontentsline{toc}{chapter}{References}

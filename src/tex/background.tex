@@ -1,5 +1,4 @@
 \chapter{Background}
-\section{Chapter content}
 In this chapter I will present relevant work in this field, especially for my analysis.\\
 -Data acquisition systems: Spike2, Dapsys, OpenEphys\\
 -Software analysis tools FieldTrip, Elephant, openMNGlab\\
@@ -152,7 +151,7 @@ Neo does not provide analysis on its own, but we can now base all of our analysi
 
 %In the end FieldTrip and Elephant offer good solution for slightly different use-cases, but are not a perfect fit for the analysis of microneurography data at the Institute of medical informatics. They are, however, a good inspiration for what should be included in such a software framework. In the case of Elephant, since it is also a python module and also makes use of the Neo structure, it could make for a good addition of more high-level analysis functionalities in the future.
 
-\subsection{Cooperation with other software}
+\subsubsection{Cooperation with other software}
 The importer for Spike2 files is already developed with the help of the Neo package and therefore many experiments that were recorded with the Spike2 software can be analysed using the framework. The same can be said for OpenEphys files, since Aiden Nickerson, a collaborator in Bristol, has implemented a corresponding importer.
 OpenMNGlab already features an importer for Dapsys recordings, which makes many experiments conducted with this system readily available for analysis.
 The difference to Spike2 however, is that the importer can not deal with the raw recording files, but requires an extra step from the user. We need to export the raw data we want to analyse as csv files from the Dapsys software, before we can import them into openMNGlab. This process is especially cumbersome when dealing with a larger number of recordings. In the future the importer functionality of openMNGlab should be improved, so that it works on the raw Dapsys files in order to make the analysis workflow easier. This is especially useful since there are many experiments recorded with Dapsys that we would like to be able to analyse.\\

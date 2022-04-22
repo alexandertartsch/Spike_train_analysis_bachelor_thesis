@@ -1,0 +1,47 @@
+\chapter{Results}
+
+%\section{Chapter content}
+In this chapter I will present the results of my analysis.\\
+Software:\\
+Software engineering:\\
+-what issues with the structure of different openMNGlab version did I encounter\\
+-What are the needs of different users of the framework in the end?\\
+
+Spike Analysis:\\
+-Describe quantifiers and discuss the results of analysing the experimental recordings\\
+-image of table containing everything the jupyter notebook has computed\\
+-table with info on electrical frequency levels in each recording\\
+-diagram showing a quantifier (peak firing frequency) and electrical frequency for each spike train of single recording\\
+-compare diagrams of different recordings\\
+-compare different quantifiers in one diagram with each other for the same file\\
+-compare ISI to log(ISI) for every train in one file\\
+
+\section{Software}
+\subsection{Finished analysis pipeline}
+The software development described in the previous chapter resulted in a single jupyter notebook, which represents the current analysis pipeline for this thesis. A schematic version of this pipeline can be seen in figure TODO. The import of the data consists of two separate importing steps. First we use the Neo importer from the current version of our framework to extract the information about the underlying electrical stimulation. After that we use the importer from the old version of openMNGlab to get the rest of the required information. The next part contains some internal processing steps to sort the spike trains and prepare the data for easy representation and quantification in the following steps.
+%I am not using neo for the spikes because the extraction of mechanical stimuli and corresponding spike trains is connected and already functioning
+
+
+\section{Spike Analysis}
+-Show picture of a table with all the quantifiers as an example and add the rest to the appendix\\
+\begin{figure}
+	\includegraphics[width = \textwidth]{src/pic/sc_table}
+	\caption{Sample picture of table after successful analysis }
+	\label{fig:table_sc}
+\end{figure}
+-first batch contains information on the mechanical stimulus, second batch single number quantifiers about spike train, last batch lists of raw data and list quantifiers such as ISI\\
+-with the help of this diagram describe the quantifiers and results that were computed\\
+
+
+%selected additional information in more detail:
+
+%-diagram of peak firing frequency, spike counts, train duration and electrical frequency\\
+%-shows the correlation between electrical frequency and the other quantifiers of single spike trains\\
+
+%-diagrams of Interspike Intervals(isi) and logarithm of isi\\
+%-should show that by taking the logarithm, the isi becomes more linear\\
+
+
+
+
+\cleardoublepage
