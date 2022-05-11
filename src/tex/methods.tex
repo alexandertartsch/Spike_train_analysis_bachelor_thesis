@@ -59,7 +59,10 @@ Starting of with this way of handling the data, I continued my own analysis by u
 With the further development of openMNGlab and the addition of the Neo package the importing process for the Spike2 files became a lot easier and faster. However, after a couple of attempts it became clear that the importer in its current state did not import the mechanical force channel from the experimental files. This might not be an issue when analysing other types of data, but for our use case it presents a big issue. Because the information of the mechanical force is required for the analysis I chose to combine parts of the old version of openMNGlab and parts of the new version. This way there is benefit from using the structure that Neo brings when it comes to speed and ease of use, but I am not missing information for the analysis.
 
 %Add info about process with quantifiers
-
+\subsubsection{Issues with importing and their solutions}
+%issues with nonworking files
+%could not differentiate spikes from normal level of signal noise\\
+There is a channel in the spike2 files where experimenters can leave comments while experimenting. This is used to make notes on the experimental protocol of the recording in many cases. In the files that I was provided there were a couple of files where the character $\mu$ was contained in this channel. While importing the corresponding files an error appeared, because the importer did not recognize the greek letters. I circumvented this problem by deleting the comment channels in those files, as they did not contain relevant information for my analysis. In other cases this might not be a possible solution and either the experimenters have to agree to not use incompatible symbols in their comments or the importer gets extended to also recognize greek letters.
 
 
 %calculation of more complex quantifiers
@@ -79,9 +82,9 @@ With the further development of openMNGlab and the addition of the Neo package t
 \end{comment}
 
 \subsection{Use Cases}
-To end this chapter I want to present a couple different use cases of various users of openMNGlab. I will describe the specifics of each use case and then give a few remarks on the current state of openMNGlab and the potential improvements necessary for a smoother experience for all users.
+To end this section I want to present a couple different use cases of various users of openMNGlab. I will describe the specifics of each use case and then give a few remarks on the current state of openMNGlab and the potential improvements necessary for a smoother experience for all users.
 
-One important feature of openMNGlab that is needed in every use-case is the importing of new data. For new users it is important to be able to load sample data sets and get a feel for the framework by getting to know a few test analysis functions. For students or experimental researchers it is key to be able to load multiple files for a quick overview or even full analysis.\\
+One important feature of openMNGlab that is needed in every use case is the importing of new data. For new users it is important to be able to load sample data sets and get a feel for the framework by getting to know a few test analysis functions. For students or experimental researchers it is key to be able to load multiple files for a quick overview or even full analysis.\\
 Because we are dealing with a couple of different sources when it comes to experimental data, which all need to be handled in a different way, this is where many issues can occur. When going through the use cases we will see where already we encounter some difficulties regarding the data import.
 
 
@@ -177,7 +180,7 @@ Potential problems: The analysis of chemically stimulated data does bring with i
 These described problems lead to the current workflow of manually selecting a suitable time frame for interesting spiking activity some time after the chemical application; some times up to a minute (check the times again) after the chemicals where applied.
 
 \subsubsection{Experimental researcher}
-Another big group of potential users for openMNGlab are experimental researchers who produce and work with electrophysiological and microneurographical data often. They will be a big part of the user base of the framework because of the nature of their work. For them it is important that the new data sets can be easily and quickly loaded and overview statistics can be displayed.
+Another big group of potential users for openMNGlab are experimental researchers who produce and work with electrophysiological and microneurographical data often. They will be a big part of the user base of the framework because of the nature of their work. For them it is important that the new data sets can be easily and quickly loaded and overview statistics can be displayed. This group of people will most likely be working with a data acquisition system primarily. As we have seen in some examples already it may come to translation errors between data acquisition and OpenMNGlab. It is therefore important for the experimental researchers to know this framework and its quirks for a smooth collaboration of these different systems.
 
 
  
@@ -211,27 +214,30 @@ This first jupyter notebook already made use of what later became openMNGlab. Th
 In this section I will describe the methods I used for analysing the spike data.
 
 \subsection{Data}
-This subsection will contain a description of the original experiment data from Roberto de Col.
-\begin{comment}
-This chapter describes the type of data we are working with.\\
--mechanically and electrically stimulated nerve fibers from rats\\
--describe reasoning for using animal data as opposed to human data\\
+%This subsection will contain a description of the original experiment data from Roberto de Col.
 Because human nerve data is hard to obtain, we can also use animal data instead as a proxy. Animal data is usable as proxy because we can observe the nerve fibers in vitro but can better separate one single nerve fiber from others. In human data an additional step of fiber separation is necessary to differentiate between individual fibers. We can use the same experimental protocols on Animals as we would on humans. This way we can understand firing patterns of spikes and quantify them. The results can then be applied to human data. \\
-In the case of this thesis, we are using the data from wistar rats. The data was recorded from 2011 to 2012 by Roberto de Col and was published in a paper (put reference). The goal of the paper was to evaluate the effects of spiking activity on the response to mechanical stimulation. 
+In the case of this thesis, we are using the data from wistar rats. The data was recorded from 2011 to 2012 by Roberto de Col and was published in a paper (put reference). The goal of the paper was to evaluate the effects of spiking activity on the response to mechanical stimulation. \\
 
--How much of the exact experimental details are supposed to go here as far as methodology goes, since this is a computer science thesis 
-
+%-How much of the exact experimental details are supposed to go here as far as methodology goes, since this is a computer science thesis 
 The experiments were done in vitro on peripheral nerve fibers. The fibers were mechanically and electrically stimulated via a custom made electromechanostimulator. The nerve activity was recorded using an electrode. The electrical stimulation consists of small electrical pulses that come in a controlled frequency. The mechanical force is applied in a sinusoidal shape. \\
 For single recordings the mechanical force that is applied throughout stays at approximately the same level for most of the files (put for how many files this is the case), but there are exceptions where the mechanical stimulation changes in amplitude and length during one recording. 
-
-The experimental software used for these experiments is called Spike2 and is described further in the background chapter.
-\end{comment}
 
 \subsection{Spike Train Definition}
 This subsection should contain the definition we use for defining spike trains. If we need a better understanding of spike trains in the Software section this subsection might move to the background chapter.
 
-\subsection{Quantifiers}
-This subsection will contain information regarding the quantifiers that I used to analyse the spike trains.
+Earlier in this thesis we covered the basics of electrical signals in nerve fibers and action potentials, or spikes. In this thesis we are, however, not interested in single spikes but in clusters of them. For this it is important to define what we mean when we speak of spike trains.\\
+In theory any number of spikes could be called a spike train. What we are interestet in is the short amount of time after a stimulus event where there is increased spiking activity. In the data provided by Roberto de Col there is, as described in the previous section, there is mechanical stimulation. This mechanical stimulation, which is approximately 250 milliseconds long, leads to noticably increased spiking activity. It is this spiking activity that we want to analyse and quantify and to have a unified way of speaking about this activity we call these clusters of spikes spike trains. We consider the mechanical stimulus the start of the spike train. This is marked in the event channel of the data. A spike train is considered finished after the increaded spiking activity has normalised. This can have a duration ranging from 150 milliseconds to 500 milliseconds. Due to computational reasons in our spike train detection we are not using any complicated algorithms but only search an interval of 500 milliseconds after the mechanical simulus to look for spikes for the spike trains. Any spikes happening after that interval do not get counted with our current method. All of the spikes happening inside of this interval get counted as belonging to the spike train.
+
+
+\subsection{Spike Train Analysis: Quantifiers}
+I will present the quantifiers that I chose to use and explain the reasoning.
+
+Starting out with raw data the first and perhaps most obvious quantifier that can be computed is the number of spikes in a spike train. It is a basic measure and can give information at a quick glance about the spike train. Of course this is not as expressive as other quantifiers and does not necessarily provide us with much context, but it can give hints at less or more active nerve fibers for example. \\
+Another quite simple quantifier I found in the literature is the mean firing rate. This is calculated by dividing the duration of the spike train by the number of spikes and gives an idea of the frequency in which the nerve fiber fires at this moment.\\
+The next quantifier I chose to include is the peak firing frequency(pff). The reason for the inclusion is because it is one of the quantifiers mentioned in Roberto de Cols original paper about this data set. The peak firing frequency is calculated for each spike train and details the concentration of spiking activity. During development I experimented with two different implementations of calculating the pff. First I tried sorting the instantaneous frequencies of a spike train by value and averaging over the 5 highest frequencies. This, however, does not give a representative look on a single section of spikes. Therefore switched to a sliding window implementation, where I calculated the average instantaneous frequency over a sliding window of width 5 and took the highest average as the peak firing frequency.\\
+At the request of my advisor I calculated the inter spike intervals(ISI) for the spike trains. This can give us a measure of the distribution of spikes in a spike train.\\
+Going off of the ISI we can compute the linearity of the inter spike intervals in the form of R2. We want to know if the ISIs tend to increase as the spike trains last longer or decrease or if there is no significant impact. From the start we suspected that the intervals increase as the spike train goes on and calculating the R2 value should give us the confirmation.
+
 
 
 \cleardoublepage

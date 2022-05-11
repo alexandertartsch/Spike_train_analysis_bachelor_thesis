@@ -1,0 +1,42 @@
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {chapter}{\numberline {2}Background}{3}
+\contentsline {section}{\numberline {2.1}Data acquisition}{3}
+\contentsline {subsection}{\numberline {2.1.1}Spike2}{3}
+\contentsline {subsection}{\numberline {2.1.2}Dapsys}{5}
+\contentsline {subsection}{\numberline {2.1.3}OpenEphys}{5}
+\contentsline {section}{\numberline {2.2}Common Spike Train Analysis Methods}{7}
+\contentsline {section}{\numberline {2.3}Spike Train Analysis Tools}{7}
+\contentsline {subsection}{\numberline {2.3.1}FieldTrip}{7}
+\contentsline {subsection}{\numberline {2.3.2}Elephant}{8}
+\contentsline {section}{\numberline {2.4}openMNGlab}{8}
+\contentsline {subsubsection}{Cooperation with other software}{9}
+\contentsline {chapter}{\numberline {3}Methods}{11}
+\contentsline {section}{\numberline {3.1}Software}{11}
+\contentsline {subsection}{\numberline {3.1.1}Data structure}{11}
+\contentsline {subsubsection}{Neo structure}{11}
+\contentsline {subsubsection}{Custom Structure}{13}
+\contentsline {subsection}{\numberline {3.1.2}Development Process}{13}
+\contentsline {subsubsection}{Issues with importing and their solutions}{13}
+\contentsline {subsection}{\numberline {3.1.3}Use Cases}{14}
+\contentsline {subsubsection}{Student 1}{15}
+\contentsline {subsubsection}{Student 2}{15}
+\contentsline {subsubsection}{Student 3}{16}
+\contentsline {subsubsection}{Experimental researcher}{16}
+\contentsline {section}{\numberline {3.2}Spike Analysis}{16}
+\contentsline {subsection}{\numberline {3.2.1}Data}{16}
+\contentsline {subsection}{\numberline {3.2.2}Spike Train Definition}{17}
+\contentsline {subsection}{\numberline {3.2.3}Spike Train Analysis: Quantifiers}{17}
+\contentsline {chapter}{\numberline {4}Results}{19}
+\contentsline {section}{\numberline {4.1}Software}{19}
+\contentsline {subsection}{\numberline {4.1.1}Finished analysis pipeline}{19}
+\contentsline {section}{\numberline {4.2}Spike Analysis}{19}
+\contentsline {subsection}{\numberline {4.2.1}Experimental Protocol}{20}
+\contentsline {subsection}{\numberline {4.2.2}Sample Analysis}{20}
+\contentsline {subsubsection}{Table of values}{20}
+\contentsline {subsubsection}{Event plot}{20}
+\contentsline {subsubsection}{Comparative diagrams for quantifiers}{21}
+\contentsline {chapter}{\numberline {5}Discussion}{25}
+\contentsline {section}{\numberline {5.1}Future Work}{25}
+\contentsline {chapter}{\numberline {6}Conclusion}{27}
+\contentsline {chapter}{References}{29}
+\contentsline {chapter}{\numberline {A}z.\,B. Programmdokumentation}{29}

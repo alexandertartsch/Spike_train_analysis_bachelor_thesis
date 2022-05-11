@@ -25,8 +25,8 @@ In this chapter I will present relevant work in this field, especially for my an
 %-why does dapsys not work in the future \\
 
 \section{Data acquisition} 
-A data acquisition system is a combination of software and hardware components that work together in order to control inputs towards and record data from different subjects.
-There are many different data acquisition systems for electrophysiological data. There are three systems that we are working with and that should be compatible with our chosen software analysis framework. These systems are Spike2, Dapsys and OpenEphys.
+A data acquisition system is a combination of software and hardware components that work together in order to control inputs towards and record data from different subjects. These systems are used whenever researchers want to record electrophysiological data.
+There are many different data acquisition systems for electrophysiological data. There are three systems that I will describe here and that should be compatible with OpenMNGlab. These systems are Spike2, Dapsys and OpenEphys.
 
 \subsection{Spike2}
 %“Spike2 is a multi-channel continuous data acquisition and analysis package”( https://ced.co.uk/products/spkovin) produced by Cambridge electronic design limited. \\
@@ -103,11 +103,16 @@ The idea behind OpenEphys came after an increased popularity of closed-loop expe
 OpenEphys makes use of inexpensive open-source hardware such as Intan chips to make it easier for small labs to get started with analysing electrophysiological data. The heart of the software part of the system is a plugin-based graphical user interface (GUI). Here the user can add different modules to the processing pipeline such as modules for communicating with the hardware or modules for analysing the data.\\
 Different labs often have widely varying sets of requirements towards data analysis and therefore data acquisition systems. At the start of a project they are confronted with the question of whether to use a proprietary system or develop their own systems, which will result in much more effort before the real work can begin. Proprietary systems also often come with very limited customization possibilities, which makes it harder to get the system that fits the users needs exactly. This is where OpenEphys comes in with its plugin-based software. It is designed so that everyone can mix and match the processing modules and end up with the exact analysis pipeline that they require. In addition to a wide array of already available processing modules, it is possible to develop your own modules that fit seamlessly into the structure of the system. OpenEphys is completely developed in C++ and based on a library for audio applications. This makes it easy to develop new modules by making use of the class inheritance capabilities of C++.\\
 OpenEphys comes with many advantages such as low cost, transparency and flexibility due to the modularity, but there are also drawbacks to using the system. The start is also a little harder than in proprietary systems, where there is often a straight forward way of getting started with your first experiments. The modular nature of the system might also effect the performance of the analysis, which is why commercial systems might be a better choice, if they fit the analysis needs.\\
+OpenEphys is a system which is used by a collaborating research team in Bristol, who as a goal should also be able to use OpenMBGlab for their analysis.
 
-In this thesis we are considering OpenEphys because it is used by a collaborating research team in Bristol, which also wants to make use of openMNGlab.
+\section{Common Spike Train Analysis Methods}
+Here I will describe the quantifiers that other people are using such as histograms. Also describe what quantifiers are usually used to decribe spike trains.
 
+I will now describe the most common methods people apply when analysing spike trains. 
 
-\section{Analysis tools}
+The type of diagram that is found most often in the literature is the histogram.
+
+\section{Spike Train Analysis Tools}
 When it comes to analysis software for microneurography data,  there are multiple available that each have their own use-cases.
 
 \subsection{FieldTrip}
@@ -128,7 +133,7 @@ It also features functions that are designed specifically for spike trains. It d
 Its focus on highly specified analysis tools makes it not viable in our use case. We want to start with a very basic look at spike trains, which is something that the Elephant package does not provide.
 For the use in this thesis I want to start with the basic signal from the spikes. Then the goal is to try and quantify spike trains, starting with basic measures as number of spikes for example. Once this ground level analysis is done we can think about the more advanced analysis provided by such tools as Elephant.
 
-\subsection{openMNGlab}
+\section{openMNGlab}
 The previously presented analysis tools have their uses in different use cases, but are not suitable for this thesis for a variety of reasons.
 There are multiple data acquisition systems that are used at IMI that each produce different file formats. The three main systems that need to be handled are the previously described Spike2, Dapsys and OpenEphys. \\ 
 We need a tool that that has the capability to load files from these different data acquisition software systems, put them in a compatible format and analyse them further.  FieldTrip does not offer these kinds of capabilities as well as it being a MATLAB package, which would not be ideal for fitting into the rest of the analysis systems at IMI, which are based on python. Elephant is a python tool, but is lacking the importing tools that would be required for the software solution.  \\
