@@ -20,9 +20,16 @@ Spike Analysis:\\
 
 \section{Software}
 \subsection{Finished analysis pipeline}
-The software development described in the previous chapter resulted in a single jupyter notebook, which represents the current analysis pipeline for this thesis. A schematic version of this pipeline can be seen in figure TODO. The import of the data consists of two separate importing steps. First we use the Neo importer from the current version of our framework to extract the information about the underlying electrical stimulation. After that we use the importer from the old version of openMNGlab to get the rest of the required information. The next part contains some internal processing steps to sort the spike trains and prepare the data for easy representation and quantification in the following steps.\\
+The software development described in the previous chapter resulted in a single jupyter notebook, which represents the current analysis pipeline for this thesis. A schematic version of this pipeline can be seen in figure TODO. 
+\\subsubsection{Importing data}
+The import of the data consists of two separate importing steps. First we use the Neo importer from the current version of our framework to extract the information about the underlying electrical stimulation. After that we use the importer from the old version of openMNGlab to get the rest of the required information. After the two importing steps we end up with two separate data structures, each containing part of the experimental data. From the first importing step, we get the event information about the electrical stimulation in the Neo format described in the previous chapter. The mechanical stimuli with its physical properties such as amplitude and duration, as well as the spike timings, we receive with the second importing step. This information is contained in the custom data structure. The spike timing would also have been available in the newer Neo format, however, the following code was already built upon working with the custom data structure, so I did not change it for the purposes of this thesis. For the future it would be a good idea to switch so that the Neo structure is the only one that is used.\\
+% spike2 csv export to import for additional custom structure
+\subsubsection{Preprocressing}
+The next part contains some internal processing steps to sort the spike trains and prepare the data for easy representation and quantification.\\
 Making use of the early versions of OpenMNGlab and the first analysis notebooks from Radomir the event plot for the current file gets computed and visualized. The next step is calculating the inter spike distances, meaning the time between two spikes, and creating inter spike distance graphs for each spike train in the recording.\\
+\\subsubsection{Computing quantifiers}
 Now follows the main part of quantifier computation. This is where the computations of my chosen quantifiers happens. After all the quantifiers are computed the resulting lists of quantifiers for each spike train get put into a data structure and saved for later reimporting and reuse for further analysis.\\
+\subsubsection{Visualizations}
 Now that the quantifiers are calculated it is time to visualize the results. For this, I create different diagrams showing quantifiers over the wholw recording and comparisons of different quantifiers that I will describe in more detail later in this chapter.\\
 See the appendix for a detailed view of the whole notebook as well as the code.
 %I am not using neo for the spikes because the extraction of mechanical stimuli and corresponding spike trains is connected and already functioning
@@ -78,7 +85,7 @@ Each file features at least one burst of increased frequency at one of the menti
 Now I will present the results of the analysis notebook with the help of an example. I will take recording 21 from the list of recordings and show the different visual results and quantifiers that were computed.
 
 \subsubsection{Table of values}
-When applying the analysis notebook to a single recording one output we get is a big table containing the finished quantifiers as well as the original timestamp values for the spikes. A sample table can be seen in Table~\ref{fig:table_sc}, which shows a screenshot of the output table for file 21. The first 6 rows before the first yellow divider has information about the mechanical stimulus such as amplitude, duration and time to the next stimulus event. The next section between the two yellow dividers shows single value quantifiers such as peak firing frequency and mean firing rate for each spike train. The third section below the second yellow divider contains lists of raw values that were used to compute the single value quantifiers.\\
+When applying the analysis notebook to a single recording, one output we get is a big table containing the finished quantifiers as well as the original timestamp values for the spikes. A sample table can be seen in Table~\ref{fig:table_sc}, which shows a screenshot of the output table for file 21. The first 6 rows before the first yellow divider has information about the mechanical stimulus such as amplitude, duration and time to the next stimulus event. The next section between the two yellow dividers shows single value quantifiers such as peak firing frequency and mean firing rate for each spike train. The third section below the second yellow divider contains lists of raw values that were used to compute the single value quantifiers.\\
 \begin{figure}
 	\includegraphics[width = \textwidth]{src/pic/sc_table}
 	\caption{Sample picture of table after successful analysis }
@@ -89,6 +96,7 @@ When applying the analysis notebook to a single recording one output we get is a
 A figure that we have seen previously in this thesis is the event plot \ref{fig:eventplot}. It shows an overview of spiking activity after mechanical stimuli over the course of a whole recording. It is not meant to be an in depth analysis tool, but rather a quick visual representation of a recording.
 
 \subsubsection{Comparative diagrams for quantifiers}
+Having computed the quantifiers is all well and good, but now we want to visually compare them in order to see if there is correlation between them in any way.
 \begin{figure}
 	\includegraphics[width = \textwidth]{src/pic/11_12_13_sp}
 	\caption{Diagram showing a separated comparison of peak firing frequency and spike count for recording 21}
@@ -99,6 +107,19 @@ A figure that we have seen previously in this thesis is the event plot \ref{fig:
 	\caption{Diagram showing a comparison of peak firing frequency and number of spikes for recording 21}
 	\label{fig:quantcomp_cm}
 \end{figure}
+
+A good visualization of this can be seen in figures \ref{fig:quantcomp_sp}. This figure compares the spike count with the Peak firing frequency in recording 21. The time is plotted on the x axis ranging from the start of the recording to the end. This recording lasted over 10000 seconds. For each spike train we plotted the Peak firing frequency, the spike count as well as the Spike train duration in separate rows of the figure. In addition we added the electrical stimulation frequency, to see what effect the changes in frequency have on different quantifiers. Figure \ref{fig:quantcomp_cm} shows the same data in a slightly different format. Here the electrical stimulation frequency is included in the rows where we plot the quantifiers to better see the immediate effect.\\
+The first thing that we can observe is that the Peak firing frequency and spike count behave very similarly and have almost the exact same graph. Secondly, the application of different electrical stimuli does seem to have an effect on the spike trains. We can see that in the areas with 4 and 5 Hertz stimulation the peak firing frequency as well as the spike count take a significant dip. However, the same cannot be said for the interval with 2 Hertz stimulation. The quantifiers stay largely the same, which leads us to the assumption that there is some sort of threshold which needs to be passed in order to influence the spike trains. In our recordings this threshold seems to lie somewhere between the 2 and 4 Hertz electrical stimulation marks.
+While the peak firing frequency and spike count show significant variation, the pike train duration stays pretty constant for the 4 Hertz stimulation but does also increase during 5 Hertz stimulation. This may point to different thresholds for different aspects of a spike train.
+
+\subsubsection{Instantaneous frequencies}
+\begin{figure}
+	\includegraphics[width = \textwidth]{src/pic/11_12_13U1b_inst_freqs}
+	\caption{Figure showing the instantaneous frequencies in each spike train for one recording.}
+	\label{fig:inst_freqs}
+\end{figure}
+Another quantifier that we can take a look at is the instantaneous frequencies of the spikes in the spike trains and observe how these change with different levels of electrical stimulation. To visualize this we recreated a figure from the original paper from Roberto de Col in Figure \ref{fig:inst_freqs}. The data for this figure is taken from recording 21. The x axis depicts the time since the last stimulus in seconds. The top part of the figure shows the force of mechanical stimulation that evoke the spike trains. This curve represents the average mechanical stimulus in this recording. A sliding window of three was used for the calculation of the instantaneous frequencies to smooth out some of the outliers. The lower part of the figure is a scatterplot of these instantaneous frequencies for every spike train in the recording. They were color-coded according to the underlying electrical stimulation frequency. The pike trains with the base level frequency of 0.1 Hertz are colored in gray, while the trains with higher stimulation are colored in red, orange and yellow for an electrical frequency of 2, 4 and 5 Hertz respectively. Finally the trains with a stimulation of 0.5 Hertz stimulation frequency are colored in blue. From the scattering of the dots we can observe that the spike trains occurring during an electrical stimulation of 4 and 5 Hertz show lower instantaneous frequencies than the base level spike trains. The red dots lie mostly in the main cluster of dots belonging to the base level spike trains, which would fit with the previous figures and the assumption of some sort of threshold for spike train alterations.
+
 
 
 %selected additional information in more detail:
