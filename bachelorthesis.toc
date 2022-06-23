@@ -29,14 +29,19 @@
 \contentsline {chapter}{\numberline {4}Results}{19}
 \contentsline {section}{\numberline {4.1}Software}{19}
 \contentsline {subsection}{\numberline {4.1.1}Finished analysis pipeline}{19}
-\contentsline {section}{\numberline {4.2}Spike Analysis}{19}
+\contentsline {subsubsection}{Importing data}{19}
+\contentsline {subsubsection}{Preprocressing}{19}
+\contentsline {subsubsection}{Computing quantifiers}{20}
+\contentsline {subsubsection}{Visualizations}{20}
+\contentsline {section}{\numberline {4.2}Spike Analysis}{20}
 \contentsline {subsection}{\numberline {4.2.1}Experimental Protocol}{20}
-\contentsline {subsection}{\numberline {4.2.2}Sample Analysis}{20}
-\contentsline {subsubsection}{Table of values}{20}
-\contentsline {subsubsection}{Event plot}{20}
-\contentsline {subsubsection}{Comparative diagrams for quantifiers}{21}
-\contentsline {chapter}{\numberline {5}Discussion}{25}
-\contentsline {section}{\numberline {5.1}Future Work}{25}
-\contentsline {chapter}{\numberline {6}Conclusion}{27}
-\contentsline {chapter}{References}{29}
-\contentsline {chapter}{\numberline {A}z.\,B. Programmdokumentation}{29}
+\contentsline {subsection}{\numberline {4.2.2}Sample Analysis}{21}
+\contentsline {subsubsection}{Table of values}{21}
+\contentsline {subsubsection}{Event plot}{22}
+\contentsline {subsubsection}{Comparative diagrams for quantifiers}{22}
+\contentsline {subsubsection}{Instantaneous frequencies}{25}
+\contentsline {chapter}{\numberline {5}Discussion}{27}
+\contentsline {section}{\numberline {5.1}Future Work}{27}
+\contentsline {chapter}{\numberline {6}Conclusion}{29}
+\contentsline {chapter}{References}{31}
+\contentsline {chapter}{\numberline {A}z.\,B. Programmdokumentation}{33}
