@@ -15,14 +15,24 @@ Didier Bouhassira, Michel Lantéri-Minet, Nadine Attal, Bernard Laurent, and
 
 \bibitem[DA]{spikeGeneral}
 Peter Dayan and L~F Abbott.
-\newblock {THEORETICAL} {NEUROSCIENCE}.
+\newblock {THEORETICAL} {NEUROSCIENCE} : {Computational} and {Mathematical}
+  {Modeling} of {Neural} {Systems}.
 \newblock page 432.
 
-\bibitem[dap]{dapsysArticle}
+\bibitem[dapa]{dapsys}
+{DAPSYS} {Data} {Acquisition} {Processor} {System}.
+
+\bibitem[dapb]{dapsysArticle}
 R\&{D} {Research} \& {Development}.
 
+\bibitem[DYG18]{elephant18}
+M.~Denker, A.~Yegenoglu, and S.~Grün.
+\newblock {C}ollaborative {HPC}-enabled workflows on the {HBP} {C}ollaboratory
+  using the {E}lephant framework.
+\newblock In {\em Neuroinformatics 2018}, page P19, 2018.
+
 \bibitem[ias22]{iasp_2022}
-Iasp website {\textbackslash}tt http://www.iasp-pain.org/, July 2022.
+Iasp website {\textbackslash}http://www.iasp-pain.org/, July 2022.
 
 \bibitem[NH09]{namer2009translational}
 Barbara Namer and Hermann~Otto Handwerker.
@@ -42,6 +52,13 @@ Robert Oostenveld, Pascal Fries, Eric Maris, and Jan-Mathijs Schoffelen.
 Fred Rieke, David Warland, Rob de~Ruyter Van~Steveninck, and William Bialek.
 \newblock {\em Spikes: exploring the neural code}.
 \newblock MIT press, 1999.
+
+\bibitem[SDF{\etalchar{+}}14]{neo14}
+Garcia S., Guarino D., Jaillet F., Jennings T.R., Pröpper R., Rautenberg P.L.,
+  Rodgers C., Sobolev A., Wachtler T., Yger P., and Davison A.P.
+\newblock Neo: an object model for handling electrophysiology data in multiple
+  formats.
+\newblock {\em Frontiers in Neuroinformatics}, 8:10, February 2014.
 
 \bibitem[SKR{\etalchar{+}}21]{schlebusch_openmnglab_2021}
 Fabian Schlebusch, Frederic Kehrein, Rainer Röhrig, Barbara Namer, and
