@@ -1,10 +1,40 @@
 \chapter{Introduction}
+\begin{comment}
 In this chapter I will give an introduction to the topic. I will give background information about neuropathic pain and the big picture goal of research in this field. \\
 -quickly explain how the transmission of pain functions inside our bodies\\
 -what is my bachelor thesis based on (paper from Roberto)\\
 -contextualize thesis topic within the big picture \\
 -talk quickly about openMNGlab and goal of adding analysis functionality and discuss software engineering goals for the framework\\
 
+nociception/pain\\
+neuropathic pain -> constant firing\\
+measuring data -> microneurography\\
+analyzing data -> openMNGlab\\
+results -> ideas for problemsolving
+
+C fibers
+when these fibers fire all the time this is called neuropathic pain
+\end{comment}
+\section{Pain and Nociception}
+%This section describes the general concept of nociception and pain.\\
+%Nociception is what happens when we experience noxious stimuli. Pain is what our brain interprets these stimuli as.
+An important field of study in the medical sciences is the study of pain. The IASP defines pain as "an unpleasant sensory and emotional experience associated with, or resembling that associated with, actual or potential tissue damage". The IASP is the international association for the study of pain. It is the leading global organization supporting the study and practice of pain and pain relief~\cite{iasp_2022}. \\
+It is important to distinguish pain from the neurally coded response to potentially harmful stimuli, which is called nociception. The definition of pain includes the internal experience, as well as the concrete stimulus response.\\
+As a result of a lesion or disease of the somatosensory nervous system people can also experience chronic neuropathic pain. Studies suggest, that around 6-10\% of people in the general population suffer from neuropathic pain~\cite{bouhassira_prevalence_2008}~\cite{van_hecke_neuropathic_2014}. Treatments for this are limited and often have side effects, which makes this disease difficult to deal with~\cite{brooks2017treatments}.\\
+In order to study this further we need to understand the basic principles of how physical stimuli are transmitted and lead to potential pain in the brain.
+
+\section{Neural Signalling}
+After a stimulus is received by a corresponding receptor, the information needs to be passed to the brain.
+The way that signals are transmitted from sensory input to the brain is via electrical signals inside of nerve fibers. Because signals have to travel aver a longer distance in the human body, the information is coded not in a continuous signal but through discrete events called action potentials or spikes~\cite{rieke1999spikes}~\cite{spikeGeneral}.\\
+Spikes are an all or nothing event, which means that the concrete spike shape does not have an effect on the encoded message. It has been shown that information is temporally encoded via patterns and firing rates of spikes.\\
+Trying to figure out how exactly information gets encoded has been a long standing research question.\\
+In order to understand aspects of the neural code we want to analyze spiking patterns in C-fibers evoked by a mechanical stimulus. This might give us small hints about the encoding of information within the neural network. \\
+One method to record such data is called microneurography (MNG). It is an electrophysiological technique that can measure peripheral nerve activity in awake human subjects~\cite{namer2009translational}. A needle electrode is inserted into a peripheral nerve and records its responses to stimuli. With this we only look at spikes from a single neuron, however, in reality signals are passed and processed by large quantities of neuronal clusters and what we are looking at is only a small part of encoding information~\cite{spikeGeneral}.\\
+In this thesis we take a look at MNG data from Roberto de Col and try to replicate some of his analysis~\cite{roberto} using the software framework openMNGlab~\cite{schlebusch_openmnglab_2021}. While doing this take a closer look at how this particular use case is handled by the software and where it can be improved.
+
+\section{Results}
+I tested importing experimental files into openMNGlab and added some analysis code. In the end I managed to import 22 files, although with some difficulties and patchwork code. These problems lead me to propose some improvements for the software. Apart from the import of the 22 files I also added some analysis code and included the results of the analysis of one of the files in detail in this thesis.\\
+I replicated some of the analysis methods used in~\cite{roberto} and concluded with the same results. We found that increased spiking activity of a nerve fiber, here evoked through electrical stimulation, leads to decreased response to a mechanical stimulus. In addition I also tried some other quantification approaches for the spike train data and added visualizations for the sample analysis.
 
 % Die Logos sind veraltet und duerfen zurzeit nicht verwendet werden!
 % Auf Seite \pageref{Logo} in Abbildung \ref{Logo} befindet sich das SE Logo.
@@ -33,18 +63,27 @@ Software: \\
 -get requirements for spike analysis software 
 
 
-There are many unsolved problems in the medical sciences. One of which is neuropathic pain, which is a type of chronic pain that can appear at any moment without any obvious factors coming from the outside. It can stem from diseases taht effect the nerves, but also from infection or injury.\\
--TODO find number of people in Germany that suffer from neuropathic pain\\
--TODO: Find out more details on neuropathic pain \\
-Pain is transmitted as electric signals through the nerves inside our bodies. Because of this fact in order to understand different types of pain such as neuropathic pain for one we need to understand the transmission of electrical signals in nerve fibers.
- \\
- We analyse data containing bursts of action potential activity as a potential proxy for neuropathic pain as the end goal. We do this in order to potentially detect this type of pain activity in neuropathic pain patients in the future.\\
-Quantifying pain can be done by measuring electrical activity of corresponding nerve fibers. By doing this we get data about the amount of electrical activity. We can also gather specifics about the way the electrical signals are being sent through the body. There are multiple ways in which one can measure electrical activity in human bodies. One of these methods is called microneurography, which is the technique most relevant for the rest of this thesis.
+There are many unsolved problems in the medical sciences. The one connected to this bachelor thesis is the issue of neuropathic pain.
+This is a type of chronic pain that can appear at any moment without any obvious factors coming from the outside. It can stem from diseases that effect the nerves, but also from infection or injury.\\
+%-TODO find number of people in Germany that suffer from neuropathic pain\\
+%-TODO: Find out more details on neuropathic pain \\
+Pain is transmitted as electric signals through the nerves inside our bodies. Because of this fact in order to understand different types of pain such as neuropathic pain we need to understand the transmission of electrical signals in nerve fibers.\\
+Quantifying pain can be done by measuring the electrical activity of corresponding nerve fibers. By doing this we get data about the amount of electrical activity. We can also gather specifics about the way the electrical signals are being sent through the body. \\
+We analyze data containing bursts of action potential activity as a potential proxy for neuropathic pain as the end goal. We do this in order to potentially detect this type of pain activity in neuropathic pain patients in the future.\\
+There are multiple ways in which one can measure electrical activity in human bodies. One of these methods is called microneurography, which is the technique most relevant for the rest of this thesis.
+This technique is used to record nerve activity in peripheral nerves. With this technique typically a needle gets inserted into a nerve fiber which then detects the electrical current in the fiber. Additionally, we can stimulate the nerve fiber to get certain responses. \\
+Nerve fibers transmit data with the use of action potentials, short AP or spike. It has been shown in previous research that information is not transmitted by the shape or amplitude of the spikes, but the frequency and timings(reference). \\
+
+%\section{Action potentials}
+Action potentials, also called spikes, are ...\\
+It has been shown that coding of information is done in the pattern of spikes. It does not matter how exactly a spike looks, spikes are treated as the same objects. 
 
 
-One of which is called microneurography. This is a technique that is used to record nerve activity in peripheral nerves. With this technique typically a needle gets inserted into a nerve fiber which then detects the electrical current in the fiber. Additionally, we can stimulate the nerve fiber to get certain responses. \\
-Nerve fibers transmit data with the use of action potentials, short AP or spike. It has been shown in previous research that information is not transmitted by the shape or amplitude of the spikes, but the frequency and timings (look the exact papers up again). 
+Another aspect of this thesis is the use of a software framework for microneurography analysis. It is called OpenMNGlab and is being developed at the chair of medical informatics at the Uniklinik Aachen~\cite{schlebusch_openmnglab_2021}. Currently this framework has the capabilities to import data from different data acquisition tools, but is lacking more in depth analysis functionality. I am working on quantifying experimental data and with the help of OpenMNGlab and developing analysis functionalities, that could be integrated into OpenMNGlab in the future.
 
-\cite{SE10}
 \end{comment}
+
+
+
+
 \cleardoublepage

@@ -1,10 +1,22 @@
 \chapter{Discussion}
+-speak about the problems with the software
+- what needs to be fixed
+
+
+-analysis:
+-threshold, already mentioned in Robertos paper
+-active nerve fiber has decreased response
+-not linear
+
+hdf5 not yet feasible, since we get 3 separate data structures and not one single concise format.
+
 
 In this chapter I will discuss the results presented in the previous chapter and think about possible future work regarding the analysis. Also I will discuss the integration of my code (quantifiers mainly) into openMNGlab and thoughts about the structuring of the software.
 
 There seems to be a threshold of electrical stimulation frequency after which we notice a change in response to the mechanical stimuli. In the diagrams where we compare different quantifiers we see that a electrical background stimulation frequency of up to $2$ Hertz does not seem to have any effect on the peak firing frequency or the number of spikes per train. With the $4$ and $5$ Hertz stimulation, however, we see a noticeable dip in peak firing frequency and number of spikes per train. This would suggest that a high load on the nerve fiber hinders the regular response to the mechanical stimulus that we see without much activity on the nerve fiber.
 
-discuss the software engineering of openmnglab
+\section{Software Engineering of OpenMNGlab}
+discuss the software engineering of openmnglab and validity of the analysis functions of this thesis.
 
 \section{Future Work}
 Since we did not use sophisticated algorithms to detect spike trains, this would be a topic for further research. Our current method relies heavily on mechanical stimulus events to tell us where we can expect a spike train to appear. This is a luxury that is not a given in microneurography data and as such it is a problem worth looking into.\\

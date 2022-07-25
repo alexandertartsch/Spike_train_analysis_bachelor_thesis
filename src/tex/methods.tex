@@ -13,205 +13,22 @@ Spike Analysis:\\
 -Data\\
 -definition of spike trains\\
 -quantifiers\\
-\end{comment}
 
-
-\begin{comment}
 TODO:\\
 -Add what I did: somewhat detailed description of my process in developing the notebook\\
 -start from the notebook which was started by Radomir for custom structure (before openMNGlab)\\
 -adding of importers from old openMNGlab version (code from Fabian)\\
 -adding of neo importers after integration into openMNGlab\\
-
--Explain the details of the different structures in python (recording from old version, neo recording/block/segment, csv files)\\
--add diagram of big picture structure of openMNGlab in greater spike data analysis pipeline\\
 \end{comment}
 \section{Software}
-The methods used in this thesis are twofold. On the one hand I tried to analyze the recordings of mechanically and electrically stimulated rats. On the other hand I also wanted to produce reusable analysis code that can be integrated into theOpenMNGlab framework in the future. For this reason I have split this chapter in two parts that deal with the Software aspect and Analysis aspect of this thesis respectively.
+The methods used in this thesis are twofold. On the one hand I tried to analyze the recordings of mechanically and electrically stimulated rats using the same quantifiers as in the reference paper~\cite{roberto}. On the other hand I wanted to get an overview over the state of the openMNGlab framework~\cite{schlebusch_openmnglab_2021}. My goal was not to provide a fully functioning analysis system as part of this thesis, but rather comment on the current issues with the software. For this I also talked to other users of the framework to get a broader view of the system.
+I have split this chapter in two parts that deal with the Software aspect and Analysis aspect of this thesis respectively.
 
-\subsection{Data structure}
-I will begin by presenting the details of the different data structures that I will use in the course of my analysis pipeline.
+The first step in the process to understanding the problems with the software was to use the software myself. By using the software I could test for potential issues while also doing work towards the analysis.
+While using the software I encountered various different errors and issues of varying size and importance.
+After using the software for myself and getting to know the framework for my own specific use case I also interviewed other users about the framework to get an idea of other potential issues with the software that I was not aware of during my time working with it.
+In the end I received a comprehensive list of problems with the software and gained a good understanding of various users needs. From this point of view I can then propose solutions and ideas for error fixing.
 
-\subsubsection{Neo structure}
-Neo models electrophysiological data in a hierarchical structure, which is depicted in Figure~\ref{fig:neostructure}. On the lowermost level we start with different kinds of data objects. An \textit{AnalogSignal} is regularly sampled data and can contain multiple channels. An \textit{IrregularlySampledSignal} is similar, but does not feature a regular sampling interval, as the name suggests. A \textit{SpikeTrain} object contains time point data with the information when action potentials occur. These \textit{SpikeTrain} objects can cover a large interval in time such as the whole duration of the recording and thus is a little different from the definition of a spike train that is otherwise used in this thesis, which I will describe in the second part of this chapter. 
-%The $SpikeTrain$ object in the Neo structure is a collection of all spikes during one recording and all spike trains as we see them would be contained in one such $SpikeTrain$ object.\\
-$Events$ in Neo point to distinct points in time and can be used to mark stimulation events for experiments with animals for example. \textit{Epochs} function similar to events, but cover a duration instead of just points in time.\\
-On the next layer up there are objects for grouping all of these lower level objects. The first of these objects is a \textit{Segment}. This groups data that was simultaneously recorded. Then there are so called \textit{Groups} which can group data in any arbitrary way and is not restricted to the data being in the same Segment. On the topmost layer there are \textit{Blocks}. One \textit{Block} can contain multiple \textit{Segments} and \textit{Groups} which in turn can contain multiple data objects.\\
-
-In case of this Bachelor thesis we are dealing with recording files from animal experiments. When importing one such file, the resulting Neo structure looks as follows: On the top level each file contains a \textit{block}. In our case these \textit{blocks} contain only one \textit{segment}, since the recordings feature a single continuous signal without interruptions.
-
-\begin{figure}
-	\includegraphics[width = \textwidth]{src/pic/neo_structure}
-	\caption{Structure of Neos hierarchical model for electrophysiological data.}
-	\label{fig:neostructure}
-\end{figure}
-
-\subsubsection{Custom Structure}
-Part of my analysis is still using code from version 1 from openMNGlab where the Neo structure was not yet integrated. The importer from version 1 delivered the data in a custom data structure.\\
-At its core the custom data structure models the data hierarchically, but the objects look a little different from the ones from Neo. At the base level there are data objects \textit{ActionPotential}, \textit{MechanicalStimulus}, \textit{ElectricalStimulus} containing information corresponding to their respective names. These objects are all part of an overlying object type called \textit{signal\_artifact}.\\
-On the top level we get an object called \textit{recording} when importing data with this method. One such \textit{recording} then contains the lists \textit{el\_stimuli}, \textit{mech\_stimuli}, \textit{actpots} which are lists containing objects of types \textit{ElectricalStimulus}, \textit{MechanicalStimulus} and \textit{ActionPotential} respectively. Additionally there is a \textit{raw\_signal} object which contains the raw signal in the form of arrays.
-
-\subsection{Development Process}
-To analyze any data I use a jupyter notebook which contains all the relevant code. I will now go over the stages in developing this notebook.
-The base of my analysis notebook started with the work of Radomir Popovich, who also worked with spike train data for IMI. He had developed a jupyter notebook based on a custom import of spike train data extracted from the Spike2 software. From this he extracted the spike trains and created figures such as event plots as seen in Figure\ref{fig:eventplot}. These event plots depict the spike trains of a single recording. Each row contains the time point data of spikes for one spike train. The x axis represents the time since the last mechanical stimulus starting at 0. These figures give a good overview with one glance over the spiking activity during mechanical stimulation for recordings.
-\begin{figure}
-	\includegraphics[width = \textwidth]{src/pic/event_plot}
-	\caption{Event plot detailing spiking activity for one recording.}
-	\label{fig:eventplot}
-\end{figure}
-Also included in this notebook was a way to filter the action potential channel so that only the relevant spikes for our spike trains remain. This was done by checking an interval of a specific duration after a mechanical stimulation event occurred for spikes and saving those in designated lists, which is still the method I use to extract the spike trains.\\
-Starting of with this way of handling the data, I continued my own analysis by using the import functions from version 1 of openMNGlab. Taking the extracted information of mechanically induced spike trains I started with quantifying these trains with simple numbers like duration or number of spikes per train.\\
-With the further development of openMNGlab and the addition of the Neo package the importing process for the Spike2 files became a lot easier and faster. This is due to the fact that the Neo importer can import the raw spike2 file, while the old importer needs intermediate steps. However, after a couple of attempts it became clear that the importer in its current state could not import the mechanical force channel from the experimental files. This might not be an issue when analyzing other types of data, but for our use case it presents a big issue. Because the information of the mechanical force is required for the analysis I chose to use both importers and combine parts of the old version of openMNGlab and parts of the new version. This way there is benefit from using the structure that Neo brings when it comes to speed and ease of use, but I am not missing information for the analysis that can not yet be accessed by the new importer.
-
-%Add info about process with quantifiers
-\subsubsection{Issues with importing and their solutions}
-%issues with nonworking files
-%could not differentiate spikes from normal level of signal noise\\
-There is a channel in the spike2 files where experimenters can leave comments while experimenting. This is used to make notes on the experimental protocol of the recording in many cases. In the files that I was provided there were a couple of files where the character $\mu$ was contained in this channel. While importing the corresponding files an error appeared, because the importer did not recognize the Greek letters. I circumvented this problem by deleting the comment channels in those files, as they did not contain relevant information for my analysis. For other analysis purposes this might not be a possible solution and either the experimenters have to agree to not use incompatible symbols in their comments or the importer gets extended to also recognize more symbols.
-
-
-%calculation of more complex quantifiers
-%graphs and diagrams
-
-\begin{comment}
--Use-cases:\\
-	\null\quad-opening data (importing)\\
-	\null\quad-latency study (Alina)\\
-	\null\quad-chemical data study (Jessica)\\
-	\null\quad-mechanically evoked spike trains (Alexander)\\
-	\null\quad-experimental researchers (Barbara)\\
--results in a list of requirements\\
--Use-cases lead to software engineering approach\\
--nessecary steps for my analysis\\
--how I implemented it
-\end{comment}
-
-\subsection{Use Cases}
-To end the first part of this chapter I want to present a couple different use cases of various users of openMNGlab. I will describe the specifics of each use case and then give a few remarks on the current state of openMNGlab and the potential improvements necessary for a smoother experience for all users.
-
-One important feature of openMNGlab that is needed in every use case is the importing of new data. For new users it is important to be able to load sample data sets and get a feel for the framework by getting to know a few test analysis functions. For students or experimental researchers it is key to be able to load multiple files for a quick overview or even full analysis.\\
-Because we are dealing with a couple of different sources when it comes to experimental data, which all need to be handled in a different way, this is where many issues can occur. When going through the use cases we will see where already we encounter some difficulties regarding the data import.
-
-
-
-\begin{comment}
--spike2 does some automatic spike filtering
--This results in up to 20 different classes of spikes in one recording
--not all of these, however, are in fact coming from different sources
--experimental researchers have already done their own filtering with their expertise, in order to combine various different of the spike2 classified spikes into larger groups and put them in so called wavemark channels.
--previously one could export these wavemark channels to csv files and inport those into the framework
--with the direct importer from the smr files, however, this is no longer possible
--what we receive after a successful import of an smr recording file are the original spike2 classified spikes in different channels
--if one were to know which of these belong together one could easily combine those together as in spike2 with the wavemark channels
--but the information of the wavemark channels is lost during the import and so one has to manually search for the correct channels first and then combine them into groups by hand
-\end{comment}
-
-\subsubsection{Student 1}
-\begin{comment}
-Alina \\
-Works with spike2 data \\
-Electrical data and mechanical data \\
-Uses old way of importing currently (csv export from spike2) \\
-Needed channels from csv export: \\
-DigMark for electrical and mechanical stimulus events \\
-WaveMark channel for timestamps of spikes \\
-Information used: \\
-Electrical stimulus events + timestamps \\
-Calculate Latency for spikes (timestamps) \\
-Calculate Spike Count  \\
-In theory this information is available with the direct import of openMNGlab right now \\
-Potential problems with direct openMNGlab importer: \\
-Each template for spikes in spike2 results in separate channel in Neo structure after openMNGlab import -> needs some filtering (manual right now) \\
-Electrical and mechanical events share a channel (DigMark) and somehow need to be distinguished if the recording also features mechanical stimulation \\
-\end{comment}
-
-The first user is a student who does data analysis on mechanically and electrically stimulated Spike2 data. The goal is to perform latency analysis for spikes.  The raw spike2 files feature a lot of information, not all of which is always needed. In this case, all that is required to analyze the latencies of the spikes are the timestamps of the spikes itself and the timestamps of the stimulation events. For the Spike2 software this means that we need to extract the DigMark channel which contains the event information as well as the corresponding wavemark channel which contains the information on the already presorted spikes.\\
-The relevant information can be imported using the importing function of openMNGlab. 
-The data is then used to calculate the latency for the spikes corresponding to the latest electrical stimulus event as well as calculating the spike count.
-
-Potential problems: The student started the analysis before the framework was working properly and therefore uses their own custom analysis notebook. However, all the information that is required is also available with the regular Spike2 importer in the current openMNGlab version.
-In recordings with both electrical and mechanical stimuli, the event markers for those stimuli share the same channel in Spike2. Although they can be distinguished in Spike2 itself, the imported channel in the Neo format does not distinguish between different event types. This needs to be addressed if we want to work with recordings that feature multiple types of stimulation.
-Additionally there might be some general import difficulties which I will elaborate later in this section.
- 
-\subsubsection{Student 2}
-\begin{comment}
-Alexander \\
-Works with spike2 data \\
-Electrical and mechanically stimulated data \\
-Uses a mixture of old and new importing currently \\
-Needed channels from csv export: \\
-Mechanical force channel \\
-Spike channel for timestamps of spikes \\
-Need channels from direct spike2 import: \\
-Electrical stimulus channel \\
-Information used: \\
-Electrical stimulus events + timestamps \\
-Mechanical stimulus events (duration, amplitude) + timestamps \\
-Timestamps for spikes in spike trains \\
-Potential problems with the Neo importer: \\
-Each template for spikes results in separate spike channels in the Neo structure -> this means that the filtered spikes in the spike2 spike channels (e.g., nw-1…) need to be bundled together again \\
-Mechanical force channel import does not work currently \\
-Electrical and mechanical events share a channel (DigMark) and somehow need to be distinguished \\
-After the import of the mechanical force channel, the mechanical stimuli need to be filtered as such (probably will not happen automatically by the importer) \\
-\end{comment}
-
-The second user is a student who uses mechanically and electrically stimulated Spike2 data. Their goal is to analyze spike trains resulting from mechanical stimulation. For this they do not need all of the information contained in the raw Spike2 file. They need the event information for mechanical and electrical stimuli as well as the mechanical force information for details of the mechanical stimuli. The event information can be found in the DigMark channel of the Spike2 file and gets extracted by the Spike2 importer of openMNGlab. The mechanical force is a continuous signal but appears in the form of sin shapes when the nerve is stimulated.
-Just as the first user they also need the information regarding the spikes themselves, which are also imported by the framework.\\
-From the gathered data the user then calculates various quantifiers for the mechanically induced spike trains such as spike count or more elaborate features. The user started this project while still using the old framework version where the channels from the Spike2 software were manually extracted to a csv file. With the updates to the framework in the meantime not all of the required information gets extracted as easily as before. This is why they use a hybrid version of the two versions of the framework where they mix and match the functions as they need them.
-%it is probably clear that this user is me. Should I just say so?
-
-Potential problems: There are similar potential problems when it comes to the event channels and regular spike channels as in the case of the first user. Additionally there are problems when it comes to the import of the mechanical force. The user started the analysis with an old version of the framework which used other importers (csv files). With this technique they could extract the mechanical force throughout the recordings. The new Neo importer still has some bugs when it comes to importing the mechanical force from the Spike2 file, which requires fixing for future users who need this information.
-
-\subsubsection{Student 3}
-\begin{comment}
-Jessica \\
-Works with spike2 data \\
-Chemical data \\
-Uses Neo importer \\
-Needed channels from import: \\
-Spike channels for spike timestamps \\
-Information used: \\
-Intervals which are relevant for the application of chemicals \\
-Spikes + timestamps inside those intervals \\
-Which chemicals are applied when \\
-Potential problems with openMNGlab importer: \\
-The chemical protocols are not automatically importable and readable; There is a channel in spike2 for comments where this information is given in theory, however, the notation of what is given and how much varies from comment to comment, and one needs a good understanding of the chemicals and potentially experimental procedure \\
-Comments channel is not being imported currently, even if the chemical notes where uniform; This means one must manually reed the comment channel in the spike2 software itself and manually choose some intervals which might be promising for observing chemically induced changes in spiking activity \\
-\end{comment}
-
-The third student user of the framework works on a project to analyze Spike2 data in which certain chemicals were applied to the test subject. In contrast to the other two users, this user started with the project when the current version of openMNGlab with the integration of the Neo module already in place. This means they only made use of the new importing functions and are not stuck with certain parts from the old framework. In addition to the spiking activity, as in the previous use-cases, they also need information regarding the chemicals that are applied. They need the timings and doses of the specific chemicals. From this they need to specify a time frame where they want to monitor the spiking activity that results from the application of the chemicals.\\
-
-Potential problems: The analysis of chemically stimulated data does bring with it its own new set of problems. There is no dedicated channel for chemical information in the Spike2 software. For this reason the chemical protocols are given in the general comment channel in Spike2. That means that the experimenter manually creates a comment every time a new chemical is applied. The issue with this is that openMNGlab does not import the comment channel. In practice the comments do not have a strict naming scheme, which would also lead to difficulties with the automatic detection of specifics regarding the chemicals. This is a problem, however, that does not stem from the framework, but is something that has to be addressed on the side of the experimental researchers.\\
-These described problems lead to the current workflow of manually selecting a suitable time frame for interesting spiking activity some time after the chemical application; sometimes up to a minute after the chemicals where applied.
-
-\subsubsection{Experimental researcher}
-Another big group of potential users for openMNGlab are experimental researchers who produce and work with electrophysiological and microneurographical data often. They will be a big part of the user base of the framework because of the nature of their work. For them it is important that the new data sets can be easily and quickly loaded and overview statistics can be displayed. This group of people will most likely be working with a data acquisition system primarily. As we have seen in some examples already it may come to translation errors between data acquisition and OpenMNGlab. It is therefore important for the experimental researchers to know this framework and its quirks for a smooth collaboration of these different systems.
-
-\begin{comment}
-Which information should available after importing data? \\
-Spikes + timestamps \\
-Electrical stimulation + timestamps \\
-Mechanical stimulation + timestamps, duration, amplitude \\
-Information about application of other stimuli (chemicals, heat…) \\
-For human data: temperature?  
-
-Spike2 \\
-Spike channels + some way to group them easily (e.g., in groups from spike2 templates) \\
-Electrical event channel + some way to distinguish between electrical and mechanical events \\
-Mechanical force channel (maybe optional) \\
-Comments channel (maybe optional) \\
-Temperature (optional) (probably needed for human data) \\
-\end{comment}
-
-\begin{comment}
-My steps in analysis: 
-
-First, I used a jupyter notebook from Radomir. For this the data needed to be extracted from Spike2 directly in the Software. This export step leads to a single csv file for one recording with 5 channels: Time, Signal, Force, DigMark(stimulation events), Spikes 
-
-Using the csv files I could extract the spike trains for each mechanical stimulation. The detection of the spike train worked as follows: The start of the spike train gets determined by the stimulation event. The length of the spike train is a previously set amount of time (in most cases 500ms). During this timeframe all spikes in the spike channel get put into a list that keeps track of the spike trains. This pretty basic detection of spike trains works well in this specific use case but has its limits when it comes to other kinds of data with other experimental protocols or just simply recordings without any protocols. Then because we do not have the exact starting points of the trains or bursting patterns this method of detection falls flat. 
-
-This first jupyter notebook already made use of what later became openMNGlab. The import of the data was handled by the software framework. However, openMNGlab got some updates soon after which made some significant changes to how the importers work. In the new and improved framework, the importer worked on the original Spike2 files instead of the extracted csv files. This allows for more detailed representation of the data since much of the information was lost in the extraction before this update. However, with this new way of importing the data the mechanical stimulation was not able to be extracted. I still needed the information of the mechanical stimulation which was only contained in the extracted csv file. For this reason, in my analysis from here on, I used a hybrid of the old and new versions of openMNGlab until I was able to fix the new importer to also include the mechanical stimulation channel. 
-\end{comment}
 
 \section{Spike Analysis}
 In the second part of this chapter I will now go into the methodology used for the concrete analysis, as well as describe some of the basic concepts that we will be needing further.
@@ -226,15 +43,17 @@ For single recordings the mechanical force that is applied throughout stays at a
 
 \subsection{Spike Train Definition}
 Earlier in this thesis we covered the basics of electrical signals in nerve fibers and action potentials, or spikes. In this thesis we are, however, not interested in single spikes but in clusters of them. For this it is important to define what we mean when we speak of spike trains.\\
-In theory any number of spikes could be called a spike train. What we are interested in is the short amount of time after a stimulus event where there is increased spiking activity, see Figure~\ref{fig:spike_train}. In the data provided by Roberto de Col there is mechanical and electrical stimulation. The mechanical stimulation, which is approximately 250 milliseconds long, leads to noticeably increased spiking activity. It is this spiking activity that we want to analyze and quantify and to have a unified way of speaking about this activity we call these clusters of spikes spike trains. We consider the mechanical stimulus the start of the spike train. This is marked in the event channel of the data. A spike train is considered finished after the increased spiking activity has normalized. This can have a duration ranging from 150 milliseconds to 500 milliseconds. Due to computational reasons in our spike train detection we are not using any complicated algorithms but only search an interval of 500 milliseconds after the mechanical stimulus to look for spikes for the spike trains. Any spikes happening after that interval do not get counted towards the spike train with our current method. All of the spikes appearing inside of this interval get counted as belonging to the spike train.
+In theory any number of spikes could be called a spike train. What we are interested in is the short amount of time after a stimulus event where there is increased spiking activity, see figure~\ref{fig:spike_train}. In the data provided by Roberto de Col there is mechanical and electrical stimulation. The mechanical stimulation, which is approximately 250 milliseconds long, leads to noticeably increased spiking activity. It is this spiking activity that we want to analyze and quantify and to have a unified way of speaking about this activity we call these clusters of spikes spike trains. We consider the mechanical stimulus the start of the spike train. This is marked in the event channel of the data. A spike train is considered finished after the increased spiking activity has normalized. This can have a duration ranging from 150 milliseconds to 500 milliseconds. Due to computational reasons in our spike train detection we are not using any complicated algorithms but only search an interval of 500 milliseconds after the mechanical stimulus to look for spikes for the spike trains. Any spikes happening after that interval do not get counted towards the spike train with our current method. All of the spikes appearing inside of this interval get counted as belonging to the spike train.
 
 \subsection{Spike Train Analysis: Quantifiers}
 Now that we had a look at the data that we have available, it is time to discuss the quantifiers that I chose to use for the analysis of the data.
 Starting out with raw data the first and perhaps most obvious quantifier that can be computed is the number of spikes in a spike train. It is a basic measure and can give information at a quick glance about the spike train. Of course this is not as expressive as other quantifiers and does not necessarily provide us with much context, but it can give hints at less or more active nerve fibers for example. \\
 Another quite simple quantifier I found in the literature is the mean firing rate. This is calculated by dividing the duration of the spike train by the number of spikes and gives an idea of the frequency in which the nerve fiber fires at this moment.\\
 The next quantifier I chose to include is the peak firing frequency. The reason for the inclusion is because it is one of the quantifiers mentioned in Roberto de Cols original paper about this data set. The peak firing frequency is calculated for each spike train and details the concentration of spiking activity. During development I experimented with two different implementations of calculating the peak firing frequency. First I tried sorting the instantaneous frequencies of a spike train by value and averaging over the 5 highest frequencies. This, however, does not give a representative look on a single section of spikes. I therefore switched to a sliding window implementation, where I calculated the average instantaneous frequency over a sliding window of width 5 and chose the highest average as the peak firing frequency.\\
+\begin{comment}
 At the request of my advisor I calculated the inter spike intervals(ISI) for the spike trains. This can give us a measure of the distribution of spikes in a spike train.\\
 Going off of the ISI we can compute the linearity of the inter spike intervals in the form of R2. We want to know if the ISIs tend to increase as the spike trains last longer or decrease or if there is no significant impact. From the start we suspected that the intervals increase as the spike train goes on and calculating the R2 value should give us the confirmation.
+\end{comment}
 
 
 

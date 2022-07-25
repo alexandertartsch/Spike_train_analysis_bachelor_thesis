@@ -4,47 +4,50 @@ The top-level auxiliary file: bachelorthesis.aux
 The style file: alpha.bst
 Database file #1: src/bib/references.bib
 Warning--I didn't find a database entry for "dapsys"
+Warning--to sort, need author or key in iasp_2022
 Warning--to sort, need author or key in spike2
 Warning--to sort, need author or key in dapsysArticle
-You've used 6 entries,
+Warning--empty journal in spikeGeneral
+Warning--empty year in spikeGeneral
+You've used 13 entries,
             2543 wiz_defined-function locations,
-            596 strings with 5686 characters,
-and the built_in function-call counts, 2469 in all, are:
-= -- 235
-> -- 139
-< -- 0
-+ -- 52
-- -- 52
-* -- 211
-:= -- 405
-add.period$ -- 16
-call.type$ -- 6
-change.case$ -- 43
-chr.to.int$ -- 6
-cite$ -- 10
-duplicate$ -- 76
-empty$ -- 174
-format.name$ -- 54
-if$ -- 487
+            636 strings with 6751 characters,
+and the built_in function-call counts, 5320 in all, are:
+= -- 514
+> -- 298
+< -- 1
++ -- 108
+- -- 108
+* -- 441
+:= -- 873
+add.period$ -- 35
+call.type$ -- 13
+change.case$ -- 90
+chr.to.int$ -- 13
+cite$ -- 21
+duplicate$ -- 178
+empty$ -- 369
+format.name$ -- 114
+if$ -- 1056
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 4
-newline$ -- 32
-num.names$ -- 12
-pop$ -- 41
+missing$ -- 11
+newline$ -- 65
+num.names$ -- 30
+pop$ -- 91
 preamble$ -- 1
-purify$ -- 49
+purify$ -- 104
 quote$ -- 0
-skip$ -- 70
+skip$ -- 158
 stack$ -- 0
-substring$ -- 139
-swap$ -- 6
-text.length$ -- 0
+substring$ -- 286
+swap$ -- 19
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 48
-warning$ -- 2
-while$ -- 18
-width$ -- 7
-write$ -- 73
-(There were 3 warnings)
+type$ -- 100
+warning$ -- 5
+while$ -- 45
+width$ -- 15
+write$ -- 156
+(There were 6 warnings)
