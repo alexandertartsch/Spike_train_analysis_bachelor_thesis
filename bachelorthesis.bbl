@@ -1,94 +1,80 @@
-\newcommand{\etalchar}[1]{$^{#1}$}
-\begin{thebibliography}{UCMDC14}
+\begin{thebibliography}{10}
 
-\bibitem[BK17]{brooks2017treatments}
-Krista~G Brooks and Tiffany~L Kessler.
-\newblock Treatments for neuropathic pain.
-\newblock {\em Clin. Pharm}, 9(12):1--12, 2017.
+\bibitem{iasp_2022}
+``Iasp website {\textbackslash}http://www.iasp-pain.org/,'' July 2022.
 
-\bibitem[BLMA{\etalchar{+}}08]{bouhassira_prevalence_2008}
-Didier Bouhassira, Michel Lantéri-Minet, Nadine Attal, Bernard Laurent, and
-  Chantal Touboul.
-\newblock Prevalence of chronic pain with neuropathic characteristics in the
-  general population.
-\newblock {\em PAIN}, 136(3):380--387, June 2008.
+\bibitem{bouhassira_prevalence_2008}
+D.~Bouhassira, M.~Lantéri-Minet, N.~Attal, B.~Laurent, and C.~Touboul,
+  ``Prevalence of chronic pain with neuropathic characteristics in the general
+  population,'' {\em PAIN}, vol.~136, pp.~380--387, June 2008.
 
-\bibitem[DA]{spikeGeneral}
-Peter Dayan and L~F Abbott.
-\newblock {THEORETICAL} {NEUROSCIENCE} : {Computational} and {Mathematical}
-  {Modeling} of {Neural} {Systems}.
-\newblock page 432.
+\bibitem{van_hecke_neuropathic_2014}
+O.~van Hecke, S.~K. Austin, R.~A. Khan, B.~H. Smith, and N.~Torrance,
+  ``Neuropathic pain in the general population: {A} systematic review of
+  epidemiological studies,'' {\em PAIN®}, vol.~155, pp.~654--662, Apr. 2014.
 
-\bibitem[dapa]{dapsys}
-{DAPSYS} {Data} {Acquisition} {Processor} {System}.
+\bibitem{brooks2017treatments}
+K.~G. Brooks and T.~L. Kessler, ``Treatments for neuropathic pain,'' {\em Clin.
+  Pharm}, vol.~9, no.~12, pp.~1--12, 2017.
 
-\bibitem[dapb]{dapsysArticle}
-R\&{D} {Research} \& {Development}.
-
-\bibitem[DYG18]{elephant18}
-M.~Denker, A.~Yegenoglu, and S.~Grün.
-\newblock {C}ollaborative {HPC}-enabled workflows on the {HBP} {C}ollaboratory
-  using the {E}lephant framework.
-\newblock In {\em Neuroinformatics 2018}, page P19, 2018.
-
-\bibitem[ias22]{iasp_2022}
-Iasp website {\textbackslash}http://www.iasp-pain.org/, July 2022.
-
-\bibitem[NH09]{namer2009translational}
-Barbara Namer and Hermann~Otto Handwerker.
-\newblock Translational nociceptor research as guide to human pain perceptions
-  and pathophysiology.
-\newblock {\em Experimental brain research}, 196(1):163--172, 2009.
-
-\bibitem[OFMS10]{fieldtrip}
-Robert Oostenveld, Pascal Fries, Eric Maris, and Jan-Mathijs Schoffelen.
-\newblock {FieldTrip}: {Open} {Source} {Software} for {Advanced} {Analysis} of
-  {MEG}, {EEG}, and {Invasive} {Electrophysiological} {Data}.
-\newblock {\em Computational Intelligence and Neuroscience}, 2011:e156869,
-  December 2010.
-\newblock Publisher: Hindawi.
-
-\bibitem[RWVSB99]{rieke1999spikes}
-Fred Rieke, David Warland, Rob de~Ruyter Van~Steveninck, and William Bialek.
-\newblock {\em Spikes: exploring the neural code}.
+\bibitem{rieke1999spikes}
+F.~Rieke, D.~Warland, R.~d.~R. Van~Steveninck, and W.~Bialek, {\em Spikes:
+  exploring the neural code}.
 \newblock MIT press, 1999.
 
-\bibitem[SDF{\etalchar{+}}14]{neo14}
-Garcia S., Guarino D., Jaillet F., Jennings T.R., Pröpper R., Rautenberg P.L.,
-  Rodgers C., Sobolev A., Wachtler T., Yger P., and Davison A.P.
-\newblock Neo: an object model for handling electrophysiology data in multiple
-  formats.
-\newblock {\em Frontiers in Neuroinformatics}, 8:10, February 2014.
+\bibitem{spikeGeneral}
+P.~Dayan and L.~F. Abbott, ``{THEORETICAL} {NEUROSCIENCE} : {Computational} and
+  {Mathematical} {Modeling} of {Neural} {Systems},'' p.~432.
 
-\bibitem[SKR{\etalchar{+}}21]{schlebusch_openmnglab_2021}
-Fabian Schlebusch, Frederic Kehrein, Rainer Röhrig, Barbara Namer, and
-  Ekaterina Kutafina.
-\newblock {openMNGlab}: {Data} {Analysis} {Framework} for {Microneurography} -
-  {A} {Technical} {Report}.
-\newblock {\em Studies in Health Technology and Informatics}, 283:165--171,
-  September 2021.
+\bibitem{namer2009translational}
+B.~Namer and H.~O. Handwerker, ``Translational nociceptor research as guide to
+  human pain perceptions and pathophysiology,'' {\em Experimental brain
+  research}, vol.~196, no.~1, pp.~163--172, 2009.
 
-\bibitem[SLP{\etalchar{+}}17]{openEphys}
-Joshua~H Siegle, Aarón~Cuevas López, Yogi~A Patel, Kirill Abramov, Shay
-  Ohayon, and Jakob Voigts.
-\newblock Open {Ephys}: an open-source, plugin-based platform for multichannel
-  electrophysiology.
-\newblock {\em Journal of Neural Engineering}, 14(4):045003, August 2017.
+\bibitem{schlebusch_openmnglab_2021}
+F.~Schlebusch, F.~Kehrein, R.~Röhrig, B.~Namer, and E.~Kutafina,
+  ``{openMNGlab}: {Data} {Analysis} {Framework} for {Microneurography} - {A}
+  {Technical} {Report},'' {\em Studies in Health Technology and Informatics},
+  vol.~283, pp.~165--171, Sept. 2021.
 
-\bibitem[spi]{spike2}
-{CED} {Spike2}: {System} introduction.
-
-\bibitem[UCMDC14]{roberto}
-Michael Uebner, Richard~W. Carr, Karl Messlinger, and Roberto De~Col.
-\newblock Activity-dependent sensory signal processing in mechanically
-  responsive slowly conducting meningeal afferents.
-\newblock {\em Journal of Neurophysiology}, 112(12):3077--3085, September 2014.
+\bibitem{roberto}
+M.~Uebner, R.~W. Carr, K.~Messlinger, and R.~De~Col, ``Activity-dependent
+  sensory signal processing in mechanically responsive slowly conducting
+  meningeal afferents,'' {\em Journal of Neurophysiology}, vol.~112,
+  pp.~3077--3085, Sept. 2014.
 \newblock Publisher: American Physiological Society.
 
-\bibitem[vHAK{\etalchar{+}}14]{van_hecke_neuropathic_2014}
-O.~van Hecke, Sophie~K. Austin, Rafi~A. Khan, B.~H. Smith, and N.~Torrance.
-\newblock Neuropathic pain in the general population: {A} systematic review of
-  epidemiological studies.
-\newblock {\em PAIN®}, 155(4):654--662, April 2014.
+\bibitem{spike2}
+``{CED} {Spike2}: {System} introduction.''
+
+\bibitem{dapsys}
+``{DAPSYS} {Data} {Acquisition} {Processor} {System}.''
+
+\bibitem{dapsysArticle}
+``R\&{D} {Research} \& {Development}.''
+
+\bibitem{openEphys}
+J.~H. Siegle, A.~C. López, Y.~A. Patel, K.~Abramov, S.~Ohayon, and J.~Voigts,
+  ``Open {Ephys}: an open-source, plugin-based platform for multichannel
+  electrophysiology,'' {\em Journal of Neural Engineering}, vol.~14, p.~045003,
+  Aug. 2017.
+
+\bibitem{fieldtrip}
+R.~Oostenveld, P.~Fries, E.~Maris, and J.-M. Schoffelen, ``{FieldTrip}: {Open}
+  {Source} {Software} for {Advanced} {Analysis} of {MEG}, {EEG}, and {Invasive}
+  {Electrophysiological} {Data},'' {\em Computational Intelligence and
+  Neuroscience}, vol.~2011, p.~e156869, Dec. 2010.
+\newblock Publisher: Hindawi.
+
+\bibitem{elephant18}
+M.~Denker, A.~Yegenoglu, and S.~Grün, ``{C}ollaborative {HPC}-enabled
+  workflows on the {HBP} {C}ollaboratory using the {E}lephant framework,'' in
+  {\em Neuroinformatics 2018}, p.~P19, 2018.
+
+\bibitem{neo14}
+G.~S., G.~D., J.~F., J.~T.R., P.~R., R.~P.L., R.~C., S.~A., W.~T., Y.~P., and
+  D.~A.P., ``Neo: an object model for handling electrophysiology data in
+  multiple formats,'' {\em Frontiers in Neuroinformatics}, vol.~8:10, February
+  2014.
 
 \end{thebibliography}

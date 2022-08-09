@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.3.22)  25 JUL 2022 23:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.3.22)  3 AUG 2022 18:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -599,7 +599,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 2--24
 
  []
 
-<src/pic/Spike2_screenshot.png, id=31, 719.68875pt x 387.69844pt>
+<src/pic/Spike2_screenshot.png, id=30, 719.68875pt x 387.69844pt>
 File: src/pic/Spike2_screenshot.png Graphic file (type png)
 
 <use src/pic/Spike2_screenshot.png>
@@ -610,7 +610,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 52--53
 
  []
 
-<src/pic/Spike2_spike_train.png, id=33, 889.82437pt x 554.07pt>
+<src/pic/Spike2_spike_train.png, id=32, 889.82437pt x 554.07pt>
 File: src/pic/Spike2_spike_train.png Graphic file (type png)
 
 <use src/pic/Spike2_spike_train.png>
@@ -677,14 +677,14 @@ Package pdftex.def Info: src/pic/neo_structure.png used on input line 34.
  [15
 
 ] [16 <./src/pic/neo_structure.png>]
-<src/pic/event_plot.png, id=87, 993.7125pt x 617.30624pt>
+<src/pic/event_plot.png, id=86, 993.7125pt x 617.30624pt>
 File: src/pic/event_plot.png Graphic file (type png)
 
 <use src/pic/event_plot.png>
 Package pdftex.def Info: src/pic/event_plot.png used on input line 49.
 (pdftex.def)             Requested size: 426.79134pt x 265.12567pt.
 
-<src/pic/Data_flow_iteration.png, id=88, 1344.02126pt x 615.29875pt>
+<src/pic/Data_flow_iteration.png, id=87, 1344.02126pt x 615.29875pt>
 File: src/pic/Data_flow_iteration.png Graphic file (type png)
 
 <use src/pic/Data_flow_iteration.png>
@@ -699,7 +699,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 180--181
 
  []
 
-[20] <src/pic/analysis_notebook.png, id=103, 932.48375pt x 261.97874pt>
+[20] <src/pic/analysis_notebook.png, id=102, 932.48375pt x 261.97874pt>
 File: src/pic/analysis_notebook.png Graphic file (type png)
 
 <use src/pic/analysis_notebook.png>
@@ -730,21 +730,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 282--285
 
  []
 
-[23] <src/pic/sc_table.png, id=116, 901.11656pt x 389.95688pt>
+[23] <src/pic/sc_table.png, id=115, 901.11656pt x 389.95688pt>
 File: src/pic/sc_table.png Graphic file (type png)
 
 <use src/pic/sc_table.png>
 Package pdftex.def Info: src/pic/sc_table.png used on input line 295.
 (pdftex.def)             Requested size: 426.79134pt x 184.6959pt.
 
-<src/pic/11_12_13_sp.png, id=117, 1156.32pt x 867.24pt>
+<src/pic/11_12_13_sp.png, id=116, 1156.32pt x 867.24pt>
 File: src/pic/11_12_13_sp.png Graphic file (type png)
 
 <use src/pic/11_12_13_sp.png>
 Package pdftex.def Info: src/pic/11_12_13_sp.png used on input line 306.
 (pdftex.def)             Requested size: 426.79134pt x 320.09303pt.
 
-<src/pic/11_12_13_cm.png, id=118, 815.045pt x 596.2275pt>
+<src/pic/11_12_13_cm.png, id=117, 815.045pt x 596.2275pt>
 File: src/pic/11_12_13_cm.png Graphic file (type png)
 
 <use src/pic/11_12_13_cm.png>
@@ -752,7 +752,7 @@ Package pdftex.def Info: src/pic/11_12_13_cm.png used on input line 311.
 (pdftex.def)             Requested size: 426.79134pt x 312.20534pt.
  [24 <./src/pic/sc_table.png>] [25 <./src/pic/11_12_13_sp.png>] [26 <./src/pic/
 11_12_13_cm.png>]
-<src/pic/11_12_13U1b_inst_freqs.png, id=131, 1156.32pt x 578.16pt>
+<src/pic/11_12_13U1b_inst_freqs.png, id=130, 1156.32pt x 578.16pt>
 File: src/pic/11_12_13U1b_inst_freqs.png Graphic file (type png)
 
 <use src/pic/11_12_13U1b_inst_freqs.png>
@@ -763,7 +763,7 @@ Package pdftex.def Info: src/pic/11_12_13U1b_inst_freqs.png used on input line
 Underfull \vbox (badness 2376) has occurred while \output is active []
 
  [27 <./src/pic/11_12_13U1b_inst_freqs.png>]
-<src/pic/11_12_13U1bevent_color.png, id=137, 1156.32pt x 722.7pt>
+<src/pic/11_12_13U1bevent_color.png, id=136, 1156.32pt x 722.7pt>
 File: src/pic/11_12_13U1bevent_color.png Graphic file (type png)
 
 <use src/pic/11_12_13U1bevent_color.png>
@@ -781,25 +781,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 23--27
 
 
 ] [30]) (./bachelorthesis.bbl
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 35.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 4.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 35.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 4.
+LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 14.
  [31
 
 
-]
-Underfull \hbox (badness 2213) in paragraph at lines 82--87
-\OT1/cmr/m/n/10.95 Activity-dependent sen-sory sig-nal pro-cess-ing in me-chan-
-i-cally re-spon-
- []
-
-LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 92.
-) (./src/tex/appendix_docu.tex [32]
+])
+(./src/tex/appendix_docu.tex [32]
 Appendix A.
 [33
 
@@ -807,10 +802,10 @@ Appendix A.
 
 ]) (./bachelorthesis.aux) ) 
 Here is how much of TeX's memory you used:
- 14960 strings out of 493014
- 287573 string characters out of 6133351
- 334696 words of memory out of 5000000
- 18166 multiletter control sequences out of 15000+600000
+ 14959 strings out of 493014
+ 287565 string characters out of 6133351
+ 334601 words of memory out of 5000000
+ 18165 multiletter control sequences out of 15000+600000
  16847 words of font info for 42 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,8n,54p,1713b,623s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -825,7 +820,7 @@ fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 </usr/local/texlive/2016/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/l
 ocal/texlive/2016/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on bachelorthesis.pdf (38 pages, 1127740 bytes).
+Output written on bachelorthesis.pdf (38 pages, 1126977 bytes).
 PDF statistics:
  198 PDF objects out of 1000 (max. 8388607)
  122 compressed objects within 2 object streams

@@ -1,53 +1,49 @@
 This is BibTeX, Version 0.99d (TeX Live 2016)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: bachelorthesis.aux
-The style file: alpha.bst
+The style file: ieeetr.bst
 Database file #1: src/bib/references.bib
-Warning--to sort, need author or key in iasp_2022
-Warning--to sort, need author or key in spike2
-Warning--to sort, need author or key in dapsys
-Warning--to sort, need author or key in dapsysArticle
 Warning--empty journal in spikeGeneral
 Warning--empty year in spikeGeneral
 You've used 16 entries,
-            2543 wiz_defined-function locations,
-            648 strings with 7329 characters,
-and the built_in function-call counts, 6604 in all, are:
-= -- 628
-> -- 389
-< -- 2
-+ -- 143
-- -- 142
-* -- 541
-:= -- 1080
-add.period$ -- 42
+            1876 wiz_defined-function locations,
+            568 strings with 6368 characters,
+and the built_in function-call counts, 4114 in all, are:
+= -- 393
+> -- 187
+< -- 0
++ -- 69
+- -- 53
+* -- 292
+:= -- 567
+add.period$ -- 16
 call.type$ -- 16
-change.case$ -- 116
-chr.to.int$ -- 15
-cite$ -- 26
-duplicate$ -- 225
-empty$ -- 451
-format.name$ -- 149
-if$ -- 1316
-int.to.chr$ -- 2
-int.to.str$ -- 0
+change.case$ -- 15
+chr.to.int$ -- 0
+cite$ -- 18
+duplicate$ -- 205
+empty$ -- 372
+format.name$ -- 53
+if$ -- 1006
+int.to.chr$ -- 0
+int.to.str$ -- 16
 missing$ -- 13
-newline$ -- 78
-num.names$ -- 36
-pop$ -- 123
+newline$ -- 54
+num.names$ -- 12
+pop$ -- 57
 preamble$ -- 1
-purify$ -- 133
+purify$ -- 0
 quote$ -- 0
-skip$ -- 202
+skip$ -- 182
 stack$ -- 0
-substring$ -- 314
-swap$ -- 30
-text.length$ -- 2
+substring$ -- 225
+swap$ -- 95
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 124
-warning$ -- 6
-while$ -- 52
+type$ -- 0
+warning$ -- 2
+while$ -- 34
 width$ -- 18
-write$ -- 189
-(There were 6 warnings)
+write$ -- 143
+(There were 2 warnings)
