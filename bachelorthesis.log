@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.3.22)  16 AUG 2022 16:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.3.22)  21 AUG 2022 22:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -432,24 +432,40 @@ Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
 \verbatim@line=\toks35
 \verbatim@in@stream=\read3
 )
+(/usr/local/texlive/2016/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen155
+\captionmargin@=\dimen156
+\captionwidth=\dimen157
+\caption@tempdima=\dimen158
+\caption@indent=\dimen159
+\caption@parindent=\dimen160
+\caption@hangindent=\dimen161
+)
+\c@ContinuedFloat=\count118
+)
 (/usr/local/texlive/2016/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count118
+\lst@mode=\count119
 \lst@gtempboxa=\box40
 \lst@token=\toks36
-\lst@length=\count119
-\lst@currlwidth=\dimen155
-\lst@column=\count120
-\lst@pos=\count121
-\lst@lostspace=\dimen156
-\lst@width=\dimen157
-\lst@newlines=\count122
-\lst@lineno=\count123
-\lst@maxwidth=\dimen158
+\lst@length=\count120
+\lst@currlwidth=\dimen162
+\lst@column=\count121
+\lst@pos=\count122
+\lst@lostspace=\dimen163
+\lst@width=\dimen164
+\lst@newlines=\count123
+\lst@lineno=\count124
+\lst@maxwidth=\dimen165
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-\c@lstnumber=\count124
-\lst@skipnumbers=\count125
+\c@lstnumber=\count125
+\lst@skipnumbers=\count126
 \lst@framebox=\box41
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/listings/listings.cfg
@@ -460,31 +476,31 @@ Package: listings 2015/06/04 1.6 (Carsten Heinz)
 (./bachelorthesis.aux)
 \openout1 = `bachelorthesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
 
 (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count126
-\scratchdimen=\dimen159
+\scratchcounter=\count127
+\scratchdimen=\dimen166
 \scratchbox=\box42
-\nofMPsegments=\count127
-\nofMParguments=\count128
+\nofMPsegments=\count128
+\nofMParguments=\count129
 \everyMPshowfont=\toks37
-\MPscratchCnt=\count129
-\MPscratchDim=\dimen160
-\MPnumerator=\count130
-\makeMPintoPDFobject=\count131
+\MPscratchCnt=\count130
+\MPscratchDim=\dimen167
+\MPnumerator=\count131
+\makeMPintoPDFobject=\count132
 \everyMPtoPDFconversion=\toks38
 ) (/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2016/05/10 v0.21 Utility functions of pdfTeX for LuaTeX (HO
@@ -547,7 +563,10 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 (/usr/local/texlive/2016/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 ))
-\c@lstlisting=\count132
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: listings package is loaded.
+Package caption Info: End \AtBeginDocument code.
+\c@lstlisting=\count133
 
 (./src/tex/cover_en.tex <src/pic/logo.jpg, id=4, 1120.185pt x 284.56313pt>
 File: src/pic/logo.jpg Graphic file (type jpg)
@@ -592,7 +611,11 @@ Chapter 1.
 [1
 
 
-] [2]) (./src/tex/background.tex
+]
+
+LaTeX Warning: Citation `code' on page 2 undefined on input line 42.
+
+[2]) (./src/tex/background.tex
 Chapter 2.
 <src/pic/Spike2_screenshot.png, id=30, 719.68875pt x 387.69844pt>
 File: src/pic/Spike2_screenshot.png Graphic file (type png)
@@ -600,6 +623,10 @@ File: src/pic/Spike2_screenshot.png Graphic file (type png)
 <use src/pic/Spike2_screenshot.png>
 Package pdftex.def Info: src/pic/Spike2_screenshot.png used on input line 46.
 (pdftex.def)             Requested size: 426.79134pt x 229.92325pt.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 47.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 47.
 
 <src/pic/Spike2_spike_train.png, id=32, 889.82437pt x 554.07pt>
 File: src/pic/Spike2_spike_train.png Graphic file (type png)
@@ -610,22 +637,23 @@ Package pdftex.def Info: src/pic/Spike2_spike_train.png used on input line 53.
  [3
 
 
-] [4 <./src/pic/Spike2_screenshot.png>]
-[5 <./src/pic/Spike2_spike_train.png>] [6] [7] [8]
+] [4 <./src/pic/Spike2_screenshot.png> <./src/pic/Spike2_spike_train.png>] [5] 
+[6] [7]
 Underfull \hbox (badness 10000) in paragraph at lines 179--180
 
  []
 
-[9] [10]) (./src/tex/methods.tex
+[8] [9] [10
+
+]) (./src/tex/methods.tex
 Chapter 3.
 [11
-
 
 ] [12] [13] [14
 
 ]) (./src/tex/results.tex
 Chapter 4.
-<src/pic/neo_structure.jpg, id=76, 569.12625pt x 492.84125pt>
+<src/pic/neo_structure.jpg, id=77, 569.12625pt x 492.84125pt>
 File: src/pic/neo_structure.jpg Graphic file (type jpg)
 
 <use src/pic/neo_structure.jpg>
@@ -638,95 +666,65 @@ Package pdftex.def Info: src/pic/neo_structure.jpg used on input line 35.
 File: src/pic/event_plot.png Graphic file (type png)
 
 <use src/pic/event_plot.png>
-Package pdftex.def Info: src/pic/event_plot.png used on input line 52.
+Package pdftex.def Info: src/pic/event_plot.png used on input line 51.
 (pdftex.def)             Requested size: 426.79134pt x 265.12567pt.
- [17]
-<src/pic/Data_flow_iteration_vert.png, id=89, 683.55376pt x 834.11626pt>
+ [17 <./src/pic/event_plot.png>]
+<src/pic/Data_flow_iteration_vert.png, id=90, 683.55376pt x 834.11626pt>
 File: src/pic/Data_flow_iteration_vert.png Graphic file (type png)
 
 <use src/pic/Data_flow_iteration_vert.png>
 Package pdftex.def Info: src/pic/Data_flow_iteration_vert.png used on input lin
-e 66.
+e 65.
 (pdftex.def)             Requested size: 426.79134pt x 520.81229pt.
+ [18] [19 <./src/pic/Data_flow_iteration_vert.png>] [20]
 
-Underfull \vbox (badness 2799) has occurred while \output is active []
-
- [18 <./src/pic/event_plot.png>] [19 <./src/pic/Data_flow_iteration_vert.png>] 
-[20]
-Underfull \hbox (badness 10000) in paragraph at lines 183--184
-
- []
+LaTeX Warning: Citation `code' on page 21 undefined on input line 217.
 
 [21] <src/pic/analysis_notebook.png, id=105, 932.48375pt x 261.97874pt>
 File: src/pic/analysis_notebook.png Graphic file (type png)
 
 <use src/pic/analysis_notebook.png>
-Package pdftex.def Info: src/pic/analysis_notebook.png used on input line 223.
+Package pdftex.def Info: src/pic/analysis_notebook.png used on input line 220.
 (pdftex.def)             Requested size: 426.79134pt x 119.90407pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 228--232
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 233--235
-
- []
-
-
-Underfull \vbox (badness 1147) has occurred while \output is active []
-
  [22 <./src/pic/analysis_notebook.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 236--237
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 238--240
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 285--288
-
- []
-
-[23] <src/pic/sc_table.png, id=113, 901.11656pt x 389.95688pt>
-File: src/pic/sc_table.png Graphic file (type png)
-
-<use src/pic/sc_table.png>
-Package pdftex.def Info: src/pic/sc_table.png used on input line 298.
-(pdftex.def)             Requested size: 426.79134pt x 184.6959pt.
+[23]
+<src/pic/11_12_13_screenshot_for_overview.png, id=113, 901.86937pt x 390.70969p
+t>
+File: src/pic/11_12_13_screenshot_for_overview.png Graphic file (type png)
+ <use src/pic/11_12_13_screenshot_for_overview.png>
+Package pdftex.def Info: src/pic/11_12_13_screenshot_for_overview.png used on i
+nput line 298.
+(pdftex.def)             Requested size: 426.79134pt x 184.89746pt.
  [24]
-<src/pic/11_12_13_sp.png, id=118, 1156.32pt x 867.24pt>
+<src/pic/11_12_13_sp.png, id=117, 1156.32pt x 867.24pt>
 File: src/pic/11_12_13_sp.png Graphic file (type png)
 
 <use src/pic/11_12_13_sp.png>
-Package pdftex.def Info: src/pic/11_12_13_sp.png used on input line 309.
+Package pdftex.def Info: src/pic/11_12_13_sp.png used on input line 306.
 (pdftex.def)             Requested size: 426.79134pt x 320.09303pt.
 
-<src/pic/11_12_13_cm.png, id=119, 815.045pt x 596.2275pt>
+<src/pic/11_12_13_cm.png, id=118, 815.045pt x 596.2275pt>
 File: src/pic/11_12_13_cm.png Graphic file (type png)
 
 <use src/pic/11_12_13_cm.png>
-Package pdftex.def Info: src/pic/11_12_13_cm.png used on input line 314.
+Package pdftex.def Info: src/pic/11_12_13_cm.png used on input line 311.
 (pdftex.def)             Requested size: 426.79134pt x 312.20534pt.
- [25 <./src/pic/sc_table.png>] [26 <./src/pic/11_12_13_sp.png>] [27 <./src/pic/
-11_12_13_cm.png>]
-<src/pic/11_12_13U1b_inst_freqs.png, id=133, 1156.32pt x 578.16pt>
+ [25 <./src/pic/11_12_13_screenshot_for_overview.png>] [26 <./src/pic/11_12_13_
+sp.png>] [27 <./src/pic/11_12_13_cm.png>]
+<src/pic/11_12_13U1b_inst_freqs.png, id=132, 1156.32pt x 578.16pt>
 File: src/pic/11_12_13U1b_inst_freqs.png Graphic file (type png)
 
 <use src/pic/11_12_13U1b_inst_freqs.png>
 Package pdftex.def Info: src/pic/11_12_13U1b_inst_freqs.png used on input line 
-325.
+323.
 (pdftex.def)             Requested size: 426.79134pt x 213.39536pt.
  [28 <./src/pic/11_12_13U1b_inst_freqs.png>] <src/pic/11_12_13U1bevent_color.pn
-g, id=138, 1156.32pt x 722.7pt>
+g, id=137, 1156.32pt x 722.7pt>
 File: src/pic/11_12_13U1bevent_color.png Graphic file (type png)
 
 <use src/pic/11_12_13U1bevent_color.png>
 Package pdftex.def Info: src/pic/11_12_13U1bevent_color.png used on input line 
-335.
+333.
 (pdftex.def)             Requested size: 426.79134pt x 266.74419pt.
  [29 <./src/pic/11_12_13U1bevent_color.png>] [30
 
@@ -759,30 +757,35 @@ Appendix A.
 
 ] [36
 
-]) (./bachelorthesis.aux) ) 
+]) (./bachelorthesis.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 14954 strings out of 493014
- 287482 string characters out of 6133351
- 336591 words of memory out of 5000000
- 18161 multiletter control sequences out of 15000+600000
- 16847 words of font info for 42 fonts, out of 8000000 for 9000
+ 16015 strings out of 493014
+ 306846 string characters out of 6133351
+ 353076 words of memory out of 5000000
+ 19215 multiletter control sequences out of 15000+600000
+ 17542 words of font info for 44 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,8n,54p,1713b,623s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/
-base/8r.enc}</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-mi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.
-pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.p
-fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
-></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-</usr/local/texlive/2016/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on bachelorthesis.pdf (40 pages, 1144565 bytes).
+ 55i,8n,54p,1724b,623s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
+exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/tex
+live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texl
+ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texliv
+e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2
+016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/20
+16/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2016
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2016/te
+xmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2016/texmf-dis
+t/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on bachelorthesis.pdf (40 pages, 1155876 bytes).
 PDF statistics:
- 202 PDF objects out of 1000 (max. 8388607)
- 126 compressed objects within 2 object streams
+ 206 PDF objects out of 1000 (max. 8388607)
+ 129 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  73 words of extra memory for PDF output out of 10000 (max. 10000000)
 

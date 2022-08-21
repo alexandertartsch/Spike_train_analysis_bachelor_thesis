@@ -20,7 +20,7 @@ Spike Analysis:\\
 
 \section{Software}
 \subsection{Data Structure}
-I will begin by presenting the details of the different data structures that I will use in the course of my analysis pipeline.
+There are different data structures used in the analysis. This comes as a result from the development process.
 
 \subsubsection{Neo Structure}
 Neo models electrophysiological data in a hierarchical structure, which is depicted in figure~\ref{fig:neostructure}. On the lowermost level we start with different kinds of data objects. An \textit{AnalogSignal} is regularly sampled data and can contain multiple channels. An \textit{IrregularlySampledSignal} is similar, but does not feature a regular sampling interval. A \textit{SpikeTrain} object contains time point data with the information when action potentials occur. These \textit{SpikeTrain} objects can cover a large interval in time such as the whole duration of the recording and thus is a little different from the definition of a spike train that is otherwise used in this thesis, which I have described in the previous chapter. 
@@ -33,21 +33,20 @@ In case of this Bachelor thesis we are dealing with recording files from animal 
 
 \begin{figure}
 	\includegraphics[width = \textwidth]{src/pic/neo_structure}
-	\caption{An illustration of the data types supported by Neo and their grouping into containers.~\cite{neo14}. An \textit{AnalogSignal} and \textit{IrregularlySampledSignal} contains regularly and irregularly sampled data respectively. \textit{SpikeTrain} objects contain a set of spikes from the same source. \textit{Events} consist of a label and a time of occurrence and \textit{Epochs} represent a period of time in the experiment. The container object \textit{Segment} can contain multiple data objects that share the same clock. A \textit{Block} is the top-level container and can contain multiple \textit{Segments}.}
+	\caption{An illustration of the data types supported by Neo and their grouping into containers taken from~\cite{neo14}. \textit{AnalogSignals} and \textit{IrregularlySampledSignals} contain regularly and irregularly sampled data respectively. \textit{SpikeTrain} objects contain a set of spikes from the same source. \textit{Events} consist of a label and a time of occurrence and \textit{Epochs} represent a period of time in the experiment. The container object \textit{Segment} can contain multiple data objects that share the same clock. A \textit{Block} is the top-level container and can contain multiple \textit{Segments}.}
 	\label{fig:neostructure}
 \end{figure}
 
 \subsubsection{Custom Structure}
 The analysis notebook is still using code from version 1 from openMNGlab where the Neo structure was not yet integrated. The importer from version 1 delivered the data in a custom data structure.
 
-At its core the custom data structure models the data hierarchically, but the objects look a little different from the ones from Neo. At the base level there are data objects \textit{ActionPotential}, \textit{MechanicalStimulus}, \textit{ElectricalStimulus} containing information corresponding to their respective names. These objects are all part of an overlying object type called \textit{signal\_artifact}.
+At its core the custom data structure models the data hierarchically, but the objects look a little different to the ones from Neo. At the base level there are data objects \textit{ActionPotential}, \textit{MechanicalStimulus}, \textit{ElectricalStimulus} containing information corresponding to their respective names. These objects are all part of an overlying object type called \textit{signal\_artifact}.
 
 On the top level we get an object called \textit{recording} when importing data with this method. One such \textit{recording} then contains the lists \textit{el\_stimuli}, \textit{mech\_stimuli}, \textit{actpots} which are lists containing objects of types \textit{ElectricalStimulus}, \textit{MechanicalStimulus} and \textit{ActionPotential} respectively. Additionally there is a \textit{raw\_signal} object which contains the raw signal in the form of arrays.
 
 
 \subsection{Development Process}
-To analyze any data a jupyter notebook is used which contains all the relevant code. I will now go over the stages in developing this notebook.
-The base of the analysis notebook started with the work of Radomir Popovich, who also worked with spike train data for IMI. He had developed a jupyter notebook based on a custom import of spike train data extracted from the Spike2 software as a csv file. From this he extracted the spike trains and created figures such as event plots as seen in figure\ref{fig:eventplot}. This is a raster plot that depicts the spike trains of a single recording. Each row represents one spike train. The x axis represents the time since the last mechanical stimulus starting at 0. These figures give a good overview with one glance over the spiking activity during mechanical stimulation for recordings.
+To analyze any data a jupyter notebook is used which contains all the relevant code. The base of the analysis notebook started with the work of Radomir Popovich, who also worked with spike train data for IMI. He had developed a jupyter notebook based on a custom import of spike train data extracted from the Spike2 software as a csv file. From this he extracted the spike trains and created figures such as event plots as seen in figure~\ref{fig:eventplot}. This is a raster plot that depicts the spike trains of a single recording. Each row represents one spike train. The x axis represents the time since the last mechanical stimulus starting at 0. These figures give a good overview with one glance over the spiking activity during mechanical stimulation for recordings.
 \begin{figure}
 	\includegraphics[width = \textwidth]{src/pic/event_plot}
 	\caption{Event plot detailing spiking activity for one recording. The x axis notes the time since the start of the last mechanical stimulus. Each row on the y axis shows the spikes of one spike train. Each line represents one spike in the recording.}
@@ -69,7 +68,7 @@ This is not an ideal solution, as three different importing methods are needed t
 \end{figure}
 
 %Add info about process with quantifiers
-\subsubsection{Issues with importing and their Solutions}
+\subsubsection{Issues with Importing and their Solutions}
 %issues with nonworking files
 %could not differentiate spikes from normal level of signal noise\\
 There is a channel in the Spike2 files where experimenters can leave comments while experimenting. This is used to make notes on the experimental protocol of the recording in many cases. In the files that were provided for this thesis there were a couple of files where the character $\mu$ was contained in this channel. While importing the corresponding files an error appeared, because the importer did not recognize the Greek letters. This problem was circumvented by deleting the comment channels in those files, as they did not contain relevant information for my analysis. This is generally not a viable solution, since the comment channel is vital for many experiments and includes important information regarding the experimental conditions. Therefore, in the future openMNGlab needs to implement a fix to the importer, so that the comment channel can be included properly.
@@ -88,10 +87,11 @@ There is a channel in the Spike2 files where experimenters can leave comments wh
 \end{comment}
 
 \subsection{Use Cases}
-To end the first part of this chapter I want to present a couple different use cases of various users of openMNGlab. I will describe the specifics of each use case and then give a few remarks on the current state of openMNGlab and the potential improvements necessary for a smoother experience for all users.
+To end the first part of this chapter different users were interviewed to share their use cases of openMNGlab. Specifics of each use case are detailed and remarks are given on the current state of openMNGlab and the potential improvements necessary for a smoother experience for all users.
 
-One important feature of openMNGlab that is needed in every use case is the importing of new data. For new users it is important to be able to load sample data sets and get a feel for the framework by getting to know a few test analysis functions. For students or experimental researchers it is key to be able to load multiple files for a quick overview or even full analysis.\\
-Because we are dealing with a couple of different sources when it comes to experimental data, which all need to be handled in a different way, this is where many issues can occur. When going through the use cases we will see where already we encounter some difficulties regarding the data import.
+One important feature of openMNGlab that is needed in every use case is the importing of new data. For new users it is important to be able to load sample data sets and get a feel for the framework by getting to know a few test analysis functions. For students or experimental researchers it is key to be able to load multiple files for a quick overview or even full analysis.
+
+Because we are dealing with different sources when it comes to experimental data, which all need to be handled in a different way, this is where many issues can occur. When going through the use cases we will see where we encounter difficulties regarding the data import.
 
 
 
@@ -126,13 +126,13 @@ Each template for spikes in spike2 results in separate channel in Neo structure 
 Electrical and mechanical events share a channel (DigMark) and somehow need to be distinguished if the recording also features mechanical stimulation \\
 \end{comment}
 
-The first user is a student who does data analysis on mechanically and electrically stimulated Spike2 data. The goal is to perform latency analysis for spikes.  The raw spike2 files feature a lot of information, not all of which is always needed. In this case, all that is required to analyze the latencies of the spikes are the timestamps of the spikes itself and the timestamps of the stimulation events. For the Spike2 software this means that we need to extract the DigMark channel which contains the event information as well as the corresponding wavemark channel which contains the information on the already presorted spikes.\\
-The relevant information can be imported using the importing function of openMNGlab. 
-The data is then used to calculate the latency for the spikes corresponding to the latest electrical stimulus event as well as calculating the spike count.
+The first user is a student who does data analysis on mechanically and electrically stimulated Spike2 data. The goal is to perform latency analysis for spikes. The raw Spike2 files feature a lot of information, not all of which is always needed. In this case, all that is required to analyze the latencies of the spikes are the timestamps of the spikes itself and the timestamps of the stimulation events. 
 
-Potential problems: The student started the analysis before the framework was working properly and therefore uses their own custom analysis notebook. However, all the information that is required is also available with the regular Spike2 importer in the current openMNGlab version.
-In recordings with both electrical and mechanical stimuli, the event markers for those stimuli share the same channel in Spike2. Although they can be distinguished in Spike2 itself, the imported channel in the Neo format does not distinguish between different event types. This needs to be addressed if we want to work with recordings that feature multiple types of stimulation.
-Additionally there might be some general import difficulties which I will elaborate later in this section.
+For the Spike2 software this means that we need to extract the "DigMark" channel which contains the event information as well as the corresponding wavemark channel which contains the information on the already presorted spikes. The relevant information can be imported using the importing function of openMNGlab. The data is then used to calculate the latency for the spikes corresponding to the latest electrical stimulus event as well as calculating the spike count.
+
+Potential problems: The student started the analysis before the first version of the framework was finished and therefore used her own custom analysis notebook. This means that the results were not in a standard format that can be reused with the current version of openMNGlab. With the inclusion of Neo the openMNGlab framework now has the capabilities to import the data and deliver it in a standard format.
+
+This does not work, however, once the experimental data features both electrical and mechanical stimulation. In recordings with both electrical and mechanical stimuli, the event markers for those stimuli share the same channel in Spike2. Although they can be distinguished in Spike2 itself, the imported channel in the Neo format does not distinguish between different event types. This is a problem which has to be addressed in future work.
  
 \subsubsection{Student 2}
 \begin{comment}
@@ -156,12 +156,10 @@ Electrical and mechanical events share a channel (DigMark) and somehow need to b
 After the import of the mechanical force channel, the mechanical stimuli need to be filtered as such (probably will not happen automatically by the importer) \\
 \end{comment}
 
-The second user is a student who uses mechanically and electrically stimulated Spike2 data. Their goal is to analyze spike trains resulting from mechanical stimulation. For this they do not need all of the information contained in the raw Spike2 file. They need the event information for mechanical and electrical stimuli as well as the mechanical force information for details of the mechanical stimuli. The event information can be found in the DigMark channel of the Spike2 file and gets extracted by the Spike2 importer of openMNGlab. The mechanical force is a continuous signal but appears in the form of sin shapes when the nerve is stimulated.
-Just as the first user they also need the information regarding the spikes themselves, which are also imported by the framework.\\
-From the gathered data the user then calculates various quantifiers for the mechanically induced spike trains such as spike count or more elaborate features. The user started this project while still using the old framework version where the channels from the Spike2 software were manually extracted to a csv file. With the updates to the framework in the meantime not all of the required information gets extracted as easily as before. This is why they use a hybrid version of the two versions of the framework where they mix and match the functions as they need them.
-%it is probably clear that this user is me. Should I just say so?
+The second user is a student who uses mechanically and electrically stimulated Spike2 data. Their goal is to analyze spike trains resulting from mechanical stimulation. For this not all of the information contained in the raw Spike2 file is needed. The event information for mechanical and electrical stimuli as well as the mechanical force information for details of the mechanical stimuli is required. The event information can be found in the "DigMark" channel of the Spike2 file and gets extracted by the Spike2 importer of openMNGlab. The two types of events are contained in the same channel and can only be separated with contextual information from the experiments. A mechanical stimulus in these recordings always appears together with an electrical stimulus. Therefore, a mechanical stimulus can be detected by the temporal distance to other stimulus events.
+To get more information about the mechanical stimulus, such as smplitude and duration, the user also needs to import the mechanical force channel. It contains a continuous signal of the applied force. In addition user two also needs the information from the wavemark channel to get the spike timings.
 
-Potential problems: There are similar potential problems when it comes to the event channels and regular spike channels as in the case of the first user. Additionally there are problems when it comes to the import of the mechanical force. The user started the analysis with an old version of the framework which used other importers (csv files). With this technique they could extract the mechanical force throughout the recordings. The new Neo importer still has some bugs when it comes to importing the mechanical force from the Spike2 file, which requires fixing for future users who need this information.
+Potential problems: The "DigMark" channel with two different event types can lead to potential problems. In this particular case they can be distinguished using contextual information, but this might not be the case for other types of experimental data. In addition these experiments introduce problems when it comes to importing the mechanical force channel. The current version of openMNGlab does not import this channel. If this information is needed for analysis, the user has to import it in another way, which leads to non-standard data structures. The inclusion of the mechanical force channel in the importer of openMNGlab is requires future work.
 
 \subsubsection{Student 3}
 \begin{comment}
@@ -180,13 +178,12 @@ The chemical protocols are not automatically importable and readable; There is a
 Comments channel is not being imported currently, even if the chemical notes where uniform; This means one must manually reed the comment channel in the spike2 software itself and manually choose some intervals which might be promising for observing chemically induced changes in spiking activity \\
 \end{comment}
 
-The third student user of the framework works on a project to analyze Spike2 data in which certain chemicals were applied to the test subject. In contrast to the other two users, this user started with the project when the current version of openMNGlab with the integration of the Neo module already in place. This means they only made use of the new importing functions and are not stuck with certain parts from the old framework. In addition to the spiking activity, as in the previous use-cases, they also need information regarding the chemicals that are applied. They need the timings and doses of the specific chemicals. From this they need to specify a time frame where they want to monitor the spiking activity that results from the application of the chemicals.\\
+The third interviewed user of the framework works on a student project to analyze Spike2 data in which chemicals were applied to the test subject. In contrast to the other two users, this user started with the project when the current version of openMNGlab with the integration of the Neo module already in place. This means she made use of the new importing functions from the beginning. In addition to the spiking activity, as in the previous use cases, this user also needs information regarding the chemicals that are applied. She requires the timings and doses of the specific chemicals. From this she specifies a time frame where she wants to monitor the spiking activity that results from the application of the chemicals.
 
-Potential problems: The analysis of chemically stimulated data does bring with it its own new set of problems. There is no dedicated channel for chemical information in the Spike2 software. For this reason the chemical protocols are given in the general comment channel in Spike2. That means that the experimenter manually creates a comment every time a new chemical is applied. The issue with this is that openMNGlab does not import the comment channel. In practice the comments do not have a strict naming scheme, which would also lead to difficulties with the automatic detection of specifics regarding the chemicals. This is a problem, however, that does not stem from the framework, but is something that has to be addressed on the side of the experimental researchers.\\
-These described problems lead to the current workflow of manually selecting a suitable time frame for interesting spiking activity some time after the chemical application; sometimes up to a minute after the chemicals where applied.
+Potential problems: The analysis of chemically stimulated data does bring with it its own new set of problems. There is no dedicated channel for chemical information in the Spike2 software. For this reason the chemical protocols are given in the "Comments" channel in Spike2. The experimenter creates a comment every time a new chemical is applied and fills it with contextual information. The current version of openMNGlab does not import the "Comments" channel, so this is something that has to be addressed in future work. The Neo structure has the data type "event" which features a timestamp and a label that could represent the comments.
 
 \subsubsection{Experimental Researcher}
-Another big group of potential users for openMNGlab are experimental researchers who produce and work with electrophysiological and microneurographical data often. They will be a big part of the user base of the framework because of the nature of their work. For them it is important that the new data sets can be easily and quickly loaded and overview statistics can be displayed. This group of people will most likely be working with a data acquisition system primarily. As we have seen in some examples already it may come to translation errors between data acquisition and OpenMNGlab. It is therefore important for the experimental researchers to know this framework and its quirks for a smooth collaboration of these different systems.
+Another big group of potential users for openMNGlab are experimental researchers who produce and work with electrophysiological and microneurographical data often. They will be a big part of the user base of the framework because of the nature of their work. For them it is important that the new data sets can be easily and quickly loaded and overview statistics can be displayed. This group of people will most likely be working with a data acquisition system primarily. As we have seen in some examples already it may come to translation errors between data acquisition and openMNGlab. It is therefore important for the experimental researchers to know this framework and its quirks for a smooth collaboration of these different systems.
 
 \begin{comment}
 Which information should available after importing data? \\
@@ -217,38 +214,38 @@ This first jupyter notebook already made use of what later became openMNGlab. Th
 
 
 \subsection{Finished Analysis Pipeline}
-The software development process resulted in a jupyter notebook, which represents the current analysis pipeline used for the analysis in this thesis. A schematic version of this pipeline can be seen in figure~\ref{fig:analysis_notebook}. For a more detailed view on the different functions, have a look at a more detailed diagram or the code in the appendix. 
+The software development process resulted in a jupyter notebook, which contains the analysis pipeline used for this thesis. A schematic version of this pipeline can be seen in figure~\ref{fig:analysis_notebook}. For a more detailed view on the different functions, the code can be found in a Github repository~\cite{code}. 
 
 \begin{figure}
 	\includegraphics[width = \textwidth]{src/pic/analysis_notebook}
-	\caption{Schematic version of analysis pipeline.}
+	\caption{Schematic version of the analysis pipeline. The raw data gets imported with different techniques, as we saw in figure~\ref{fig:import_iteration}. After handling the different input structures, we receive the spikes and stimuli. The quantifiers described in chapter 3 are computed and can be visualized in tables and diagrams described in detail in this chapter.}
 	\label{fig:analysis_notebook}
 \end{figure}
 \subsubsection{Importing Data}
-The first part of the notebook is the import of the data, which consists of two separate importing steps. 
-First we use the Neo importer from the current version of our framework to extract the information about the underlying electrical stimulation. After that we use the importer from the old version of openMNGlab to get the spike timings as well as the information about the mechanical stimuli.
-After the two importing steps we end up with two separate data structures, that we discussed in the previous chapter, each containing part of the experimental data. From the first importing step, we get the event information about the electrical stimulation in the Neo format. The mechanical stimuli with its physical properties such as amplitude and duration, as well as the spike timings, we receive with the second importing step. This information is contained in the custom data structure. The spike timing would also have been available in the newer Neo format, however, the analysis code was started with the custom data structure in mind, so I did not change that part of the code for the purposes of this thesis. For the future it would be a good idea to switch fully to the Neo structure, so that there is a unified structure for everything.\\
-% spike2 csv export to import for additional custom structure
+The first part of the notebook is the import of the data, which consists of three separate importing steps.
+First the Neo importer from the current version of openMNGlab is used to extract the information about the underlying electrical stimulation. In a second step we use the importer from the version 1 of openMNGlab to get the spike timings as well as the information about the mechanical stimuli. Lastly, to get the information about the mechanical stimuli, such as amplitude and duration, from the previously described custom import.
+
+After the importing steps we end up with separate data structures, each containing part of the experimental data. From the first importing step, we get the event information about the electrical stimulation in the Neo format. The mechanical stimuli with its physical properties such as amplitude and duration, as well as the spike timings, are contained in a custom data structure. For the future it would be ideal to develop openMNGlab so that everything can get imported with the Neo importer in one single step and everything is contained in a unified data structure.
+
 \subsubsection{Preprocressing}
-The next part of the notebook contains internal processing steps to sort the spike trains and prepare the data for easy representation and quantification.\\
-Making use of the early versions of OpenMNGlab and the first analysis notebooks from Radomir the event plot for the current file gets computed and visualized. The next step is calculating the inter spike distances, meaning the time between two spikes, and creating inter spike distance graphs for each spike train in the recording.\\
+The next part of the notebook contains internal processing steps to prepare the data for easy representation and quantification. Making use of the early versions of openMNGlab and analysis attempts, the event plot for the recording file gets computed and visualized. 
+%The next step is calculating the inter spike distances, meaning the time between two spikes, and creating inter spike distance graphs for each spike train in the recording.
+
 \subsubsection{Computing Quantifiers}
-Now follows the main part of quantifier computation. This is where the computations of my chosen quantifiers happens. After all the quantifiers are computed the resulting lists of quantifiers for each spike train get put into a data structure and saved for later reimporting and reuse for further analysis.\\
+After preparing the data, quantifier computation can take place. This is where the computations of the quantifiers described in chapter 3 happens. After all the computations are done, we end up with lists of quantifiers for each spike train in the recording. These are the main result of the analysis pipeline. They can be further processed and displayed in diagrams or be saved for later use. The data structure in which the quantifiers are saved in the analysis is a custom structure. Once openMNGlab can import and handle this type of experimental data fully, it can also be saved in a standard way such as hdf5.
+
 \subsubsection{Visualizations}
-Now that the quantifiers are calculated it is time to visualize the results. For this, I created different diagrams showing quantifiers over the whole recording and comparisons of different quantifiers. These figures will be explained in the analysis part of this chapter.\\
-%See the appendix for a detailed view of the whole notebook as well as the code.
-
-
+An important aspect to understanding the results of the analysis are the visualizations. Raw lists of data are not as easily readable and do not offer great insights at a first glance. Therefore, we compute different diagrams from the quantifiers to help with this issue. These diagrams range from event plots that we have seen before to figures comparing different quantifiers for a recording. They will be explained in detail in the following sections.
 
 \section{Spike Analysis}
-We have analyzed 22 recording files featuring  mechanical and electrical stimulation. An overview for the data can be found in  Table~\ref{table:recording_overview}. Here we see the number of spike trains in each file and the average spikes per train as well as the average spike train duration. More information about the specific recordings is following in the next section.
+We have analyzed 22 recording files featuring  mechanical and electrical stimulation. An overview for the data can be found in table~\ref{table:recording_overview}. Here we see the number of spike trains in each file and the average spikes per train as well as the average spike train duration. More information about the specific recordings is following in the next section.
 
 %\begin{comment}
 \begin{table}[!ht]
 \centering
 \begin{tabular}{ |c|c|c|c| }
 	\hline
-	File number & Number of trains  & Avg. spikes per train & Avg. train duration\\
+	File number & Number of trains  & Avg. spikes per train & Avg. train duration (s)\\
 	\hline
 	1 & 17 & 12.53 & 0.38 \\
 	2 & 34 & 16.62 & 0.39 \\
@@ -274,40 +271,40 @@ We have analyzed 22 recording files featuring  mechanical and electrical stimula
 	22 & 50 & 12.16 & 0.36\\
 	\hline
 \end{tabular}
-\caption{This table shows an overview over the available recording files for this thesis.}
+\caption{This table shows basic numbers for each of the 22 analyzed recording files: the number of spike trains, the average number of spikes per spike train and the average spike train duration in seconds for each recording.}
 \label{table:recording_overview}
 \end{table}
 %\end{comment}
 
 \subsection{Experimental Protocol}
-This subsection will explain how the recording files are structured to get a better general understanding of the experiments and analysis.
+As mentioned in previous chapters, the files analyzed in this thesis feature electrical and mechanical stimulation. The fibers are mechanically stimulated with a custom-built electromechanostimulator~\cite{roberto}. For each fiber the mechanical threshold was determined as the force which would evoke a spike in 50\% of the time. The mechanical force was set as double the threshold for the duration of the experiment.
 
-As mentioned in previous chapters, the files I am working with feature electrical and mechanical stimulation. The fibers are mechanically stimulated with a custom-built electromechanostimulator~\cite{roberto}. For each fiber the mechanical threshold was determined and then a sufficiently high enough mechanical force was set for the duration of the experiment.
-Mechanical force is applied with a duration of 250 or 500 ms, as can be seen in table~\ref{table:recording_overview} with the previously determined force. During their research Uebner et al. found that a sinosoidal stimulus profile works best for the experiments. The attributes of this type of stimulation, like amplitude or duration, is constant over the course of single recordings, but may change  for different recordings. In addition to the mechanical stimulation there is also electrical stimulation, which is applied as electrical impulses with a certain frequency. The base frequency of the electrical stimulation is the same for each of the recordings and lies at $0.1$ Hertz. This base frequency is applied during the whole recording with a few exceptions. Each recording features segments where there is electrical stimulation with increased frequency, during which a varying number of spike trains take place (usually $5-6$). After each of those segments with increased electrical frequency there is a smaller period of stimulation where the frequency is at $0.5$ Hertz before it goes back to the base frequency. One spike train get triggered during each of these small periods. In the recordings that where analyzed in this thesis there are 3 different levels of increased electrical stimulation frequency, which lie at $2.0, 4.0$ and $5.0$ Hertz.\\
-Each file features at least one burst of increased frequency at one of the mentioned levels. The files in Table~\ref{table:recording_overview} are ordered according to the frequencies of electrical stimulation that occurred in the recordings. Files $1-3, 4-12, 13-14$ contain only frequencies of $2.0, 4.0, 5.0$ Hertz respectively. Files $15-20$ contain both $2.0$ and $4.0$ Hertz frequencies and files $21-22$ contain all three types of increased frequencies.\\
+During their research Uebner et al. found that a half sinosoidal stimulus profile works best for the experiments. The attributes for this type of stimulation, like amplitude or duration, are constant over the course of single recordings, but may vary between recordings. In addition to the mechanical stimulation there is also electrical stimulation, which is applied as electrical impulses with a certain frequency. 
+
+In the experiments there is a first period of 15 minutes with an electrical stimulation frequency of 0.1 Hz. Then follows a second period of increased stimulation frequency. The increased frequency is either 2, 4 or 5 Hz. The third period features 0.1 Hz stimulation frequency again. During each of the 3 periods 5 mechanical stimuli are applied with a recovery time of 3 minutes in between stimuli. After the second period there is a period of 0.5 Hz stimulation that lasts for 3 minutes. 
+
+Each recording features the protocol at least once. It was repeated in many of the files with a resting period without any stimulation in between protocols. The files in Table~\ref{table:recording_overview} are ordered according to the frequencies of electrical stimulation that occurred in the recordings. Files 1-3, 4-12, 13-14 contain only frequencies of 2, 4, 5 Hertz respectively. Files 15-20 contain both 2.0 and 4.0 Hertz frequencies and files 21-22 contain all three types of increased frequencies.
 
 \subsection{Sample Analysis}
-To show the results of the analysis in more detail I will use recording 21 as an example and demonstrate the outcomes. This will give a good look at the quantifiers that I chose to utilize as well as present possible visualizations using those quantifiers.
+To show the results of the analysis in more detail we will look at recording 21 as an example and demonstrate the outcomes. This will provide details of the quantifiers as well as present possible visualizations.
 
 \subsubsection{Table of Values}
-When applying the analysis notebook to a recording, the first basic output we get is a big table containing the finished quantifiers as well as the original timestamp values for the spikes. A sample table can be seen in Table~\ref{fig:table_sc}, which shows a screenshot of the output table for recording 21.
-First of all the table contains the mechanical stimulus information for each train. This includes the amplitude, duration and timestamp of the corresponding stimulus. In the figure this information is contained in the upper third of the table.
-In addition the table features the single value quantifiers for the spike trains that I described in the previous chapter. These include among others the peak firing frequency, spike count and mean firing frequency and can be found in the middle third of the figure.
-Lastly the table also features some of the raw data such as the spike timings as well as some intermediate results such as the inter pike intervals, which can be used to compute some of the single value quantifiers. These are depicted in the lower third of the figure in an abbreviated version for the sake of visibility.\\
+When applying the analysis notebook to a recording, the first output we get is a big table containing the quantifiers as well as the raw data of the mechanical stimulus amplitude, duration and spike timings. A sample table can be seen in table~\ref{fig:table_sc}, which shows a screenshot of the output table for recording 21.
+The table contains the mechanical stimulus information for each train. This includes the amplitude, duration and timestamp of the corresponding stimulus. In the figure this information is contained in the upper third of the table.
+
+In addition the table features the single value quantifiers for the spike trains that were described in the previous chapter. These include the peak firing frequency, spike count and mean firing frequency and can be found in the middle third of the figure.
+Lastly the table also features raw data such as the spike timings as well as inter spike intervals and instantaneous frequencies. These are depicted in the lower third of the figure in an abbreviated version for the sake of visibility.
 \begin{figure}
-	\includegraphics[width = \textwidth]{src/pic/sc_table}
-	\caption{Sample picture of table after successful analysis }
+	\includegraphics[width = \textwidth]{src/pic/11_12_13_screenshot_for_overview}
+	\caption{Screenshot of the table of values in excel. The table contains quantifiers and raw data of the spike trains in a recording. At the top there is information about the mechanical stimulus (e.g. amplitude, duration and onset). In the middle there are single value quantifiers such as peak firing frequency or mean firing rate. At the bottom there is raw data: spike times, inter spike intervals and instantaneous frequencies.}
 	\label{fig:table_sc}
 \end{figure}
 
-
-
-
 \subsubsection{Comparative Diagrams for Quantifiers}
-Having computed the quantifiers is all well and good, but now we want to visually compare them in order to see if there is correlation between them in any way.
+After having computed the quantifiers, we want to visually compare them in order to see if there is a correlation between them.
 \begin{figure}
 	\includegraphics[width = \textwidth]{src/pic/11_12_13_sp}
-	\caption{Diagram showing a separated comparison of peak firing frequency and spike count for recording 21}
+	\caption{Diagram showing a separated comparison different quantifiers for recording 21. In the first row of the figure, the peak firing frequency (1/s) is plotted for each spike train in the recording. The second row shows the spike count and the third row the spike train duration (s) for the trains. The last row shows the level of electrical stimulation frequency (Hz) during each train in red dots.}
 	\label{fig:quantcomp_sp}
 \end{figure}
 \begin{figure}
@@ -316,24 +313,25 @@ Having computed the quantifiers is all well and good, but now we want to visuall
 	\label{fig:quantcomp_cm}
 \end{figure}
 
-A good visualization of this can be seen in figure~\ref{fig:quantcomp_sp}. This figure compares the spike count with the Peak firing frequency in recording 21. The time is plotted on the x axis ranging from the start of the recording to the end. This recording lasted over 10000 seconds. For each spike train we plotted the Peak firing frequency, the spike count as well as the Spike train duration in separate rows of the figure. In addition we added the electrical stimulation frequency, to see what effect the changes in frequency have on different quantifiers. Figure~\ref{fig:quantcomp_cm} shows the same data in a slightly different format. Here the electrical stimulation frequency is included in the rows where we plot the quantifiers to better see the immediate effect.\\
-The first thing that we can observe is that the Peak firing frequency and spike count behave very similarly and have almost the exact same graph. Secondly, the application of different electrical stimuli does seem to have an effect on the spike trains. We can see that in the areas with 4 and 5 Hertz stimulation the peak firing frequency as well as the spike count take a significant dip. However, the same cannot be said for the interval with 2 Hertz stimulation. The quantifiers stay largely the same, which leads us to the assumption that there is some sort of threshold which needs to be passed in order to influence the spike trains. In our recordings this threshold seems to lie somewhere between the 2 and 4 Hertz electrical stimulation marks.
+A good visualization of this can be seen in figure~\ref{fig:quantcomp_sp}. This figure compares the spike count with the peak firing frequency in recording 21. The time is plotted on the x axis ranging from the start of the recording to the end. This recording lasted over 10,000 seconds. For each spike train we plotted the peak firing frequency, the spike count as well as the spike train duration in separate rows of the figure. In addition we added the electrical stimulation frequency, to see what effect the changes in frequency have on different quantifiers. Figure~\ref{fig:quantcomp_cm} shows the same data in a slightly different format. Here the electrical stimulation frequency is included in the rows where we plot the quantifiers to better see the immediate effect.
+
+The first thing that we can observe is that the peak firing frequency and spike count behave very similarly. Secondly, the application of different electrical stimuli does seem to have an effect on the spike trains. We can see that during the periods with 4 and 5 Hz stimulation the peak firing frequency as well as the spike count take a significant dip. However, the same cannot be said for the interval with 2 Hz stimulation. The quantifiers stay largely the same, which leads us to the assumption that there is some sort of threshold which needs to be passed in order to influence the spike trains. In our recordings this threshold seems to lie somewhere between the 2 and 4 Hertz electrical stimulation marks.
 While the peak firing frequency and spike count show significant variation, the pike train duration stays pretty constant for the 4 Hertz stimulation but does also increase during 5 Hertz stimulation. This may point to different thresholds for different aspects of a spike train.
 
 \subsubsection{Instantaneous Frequencies}
 \begin{figure}
 	\includegraphics[width = \textwidth]{src/pic/11_12_13U1b_inst_freqs}
-	\caption{Figure showing the instantaneous frequencies in each spike train for one recording.}
+	\caption{The top part of the figure shows the averaged mechanical force (mN) during stimulation for recording 21. The lower part details the instantaneous frequencies for each spike train. The instantaneous frequencies were averaged with a sliding window of three to lessen the impact of outliers. Spikes occurring during 0.1 Hz stimulation are color-coded in grey, spikes during 2, 4, 5 and 0.5 Hz stimulation are colored in red, yellow, green and black respectively.}
 	\label{fig:inst_freqs}
 \end{figure}
-Another quantifier that we can take a look at is the instantaneous frequencies of the spikes in the spike trains and observe how these change with different levels of electrical stimulation. To visualize this we recreated a figure from the original paper from Roberto de Col in figure \ref{fig:inst_freqs}. The data for this figure is taken from recording 21. The x axis depicts the time since the last stimulus in seconds. The top part of the figure shows the force of mechanical stimulation that evoke the spike trains. This curve represents the average mechanical stimulus in this recording. A sliding window of three was used for the calculation of the instantaneous frequencies to smooth out some of the outliers. The lower part of the figure is a scatterplot of these instantaneous frequencies for every spike train in the recording. They were color-coded according to the underlying electrical stimulation frequency. The pike trains with the base level frequency of 0.1 Hertz are colored in gray, while the trains with higher stimulation are colored in red, yellow and green for an electrical frequency of 2, 4 and 5 Hertz respectively. Finally the trains with a stimulation of 0.5 Hertz stimulation frequency are colored in blue. From the scattering of the dots we can observe that the spike trains occurring during an electrical stimulation of 4 and 5 Hertz show lower instantaneous frequencies than the base level spike trains. The red dots lie mostly in the main cluster of dots belonging to the base level spike trains, which would fit with the previous figures and the assumption of some sort of threshold for spike train alterations.
+Another quantifier that we can take a look at is the instantaneous frequencies of the spikes in the spike trains and observe how these change with different levels of electrical stimulation frequency. To visualize this we recreated a figure from the original paper from Uebner et al. in figure~\ref{fig:inst_freqs}. The data for this figure is taken from recording 21. The x axis depicts the time since the last stimulus in seconds. The top part of the figure shows the force of mechanical stimulation that evoke the spike trains. This curve represents the average mechanical stimulus in this recording. A sliding window of three was used for the calculation of the instantaneous frequencies to smooth out some of the outliers. The lower part of the figure is a scatterplot of these instantaneous frequencies for every spike train in the recording. They were color-coded according to the underlying electrical stimulation frequency. Spike trains with a frequency of 0.1 Hz are colored in gray, while trains with higher stimulation are colored in red, yellow and green for an electrical frequency of 2, 4 and 5 Hz respectively. Finally, trains with a stimulation of 0.5 Hz stimulation frequency are colored in black. From the scattering of the dots we can observe that the spike trains occurring during an electrical stimulation of 4 and 5 Hz show lower instantaneous frequencies than the base level spike trains. The red dots, belonging to the 2 Hz stimulation, lie mostly in the main cluster of dots belonging to the base level spike trains, which would fit with the previous figures and the assumption of some sort of threshold for spike train alterations.
 
 \subsubsection{Event plot}
 A figure that we have seen previously in this chapter is the event plot. It shows an overview of spiking activity after mechanical stimuli over the course of a whole recording. Figure~\ref{fig:event_color} shows a color coded event plot. This shows the same recording as figure~\ref{fig:inst_freqs} and uses the same color coding for the electrical frequencies. It is not meant to be an in depth analysis tool, but rather a quick visual representation of a recording. This can give us an idea if it makes sense to further analyze a particular recording, by looking at the length of the spike trains.
 
 \begin{figure}
 	\includegraphics[width = \textwidth]{src/pic/11_12_13U1bevent_color}
-	\caption{Color coded event plot}
+	\caption{Color coded event plot. Every line in this plot represents a spike in the recording. The time since the latest mechanical stimulus is given on the x axis. The y axis differentiates the spike trains, which are numbered in order of appearance. Spikes are colored grey, red, yellow, green, black when occurring during electrical stimulation with a frequency of 0.1, 2, 4, 5, 0.5 Hz respectively.}
 	\label{fig:event_color}
 \end{figure}
 
