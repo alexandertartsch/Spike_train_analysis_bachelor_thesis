@@ -1,49 +1,50 @@
 This is BibTeX, Version 0.99d (TeX Live 2016)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: bachelorthesis.aux
-The style file: ieeetr.bst
+The style file: unsrt.bst
 Database file #1: src/bib/references.bib
+Warning--I didn't find a database entry for "code"
 Warning--empty journal in spikeGeneral
 Warning--empty year in spikeGeneral
 You've used 16 entries,
-            1876 wiz_defined-function locations,
-            568 strings with 6368 characters,
-and the built_in function-call counts, 4114 in all, are:
-= -- 393
+            1791 wiz_defined-function locations,
+            537 strings with 6686 characters,
+and the built_in function-call counts, 3483 in all, are:
+= -- 278
 > -- 187
-< -- 0
+< -- 2
 + -- 69
 - -- 53
-* -- 292
-:= -- 567
-add.period$ -- 16
+* -- 267
+:= -- 540
+add.period$ -- 42
 call.type$ -- 16
 change.case$ -- 15
 chr.to.int$ -- 0
 cite$ -- 18
-duplicate$ -- 205
-empty$ -- 372
+duplicate$ -- 145
+empty$ -- 343
 format.name$ -- 53
-if$ -- 1006
+if$ -- 764
 int.to.chr$ -- 0
 int.to.str$ -- 16
 missing$ -- 13
-newline$ -- 54
+newline$ -- 77
 num.names$ -- 12
-pop$ -- 57
+pop$ -- 60
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 182
+skip$ -- 75
 stack$ -- 0
-substring$ -- 225
-swap$ -- 95
-text.length$ -- 0
+substring$ -- 198
+swap$ -- 30
+text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 2
-while$ -- 34
+while$ -- 28
 width$ -- 18
-write$ -- 143
-(There were 2 warnings)
+write$ -- 159
+(There were 3 warnings)

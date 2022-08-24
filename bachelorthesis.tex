@@ -12,6 +12,7 @@
 \usepackage[strict]{changepage}
 \usepackage{verbatim}
 \usepackage[font={small,it}]{caption}
+\usepackage{hyperref}
 
 \pdfoptionpdfminorversion=6
 
@@ -112,14 +113,14 @@
 
 %\input{src/tex/listings}
 
-%\input{src/tex/conclusion.tex}
+\input{src/tex/conclusion.tex}
 
-\bibliographystyle{ieeetr}
+\bibliographystyle{unsrt}
 \addcontentsline{toc}{chapter}{References}
 \bibliography{src/bib/references}
 
 % Begin Anhang
-\appendix
-\input{src/tex/appendix_docu}
+%\appendix
+%\input{src/tex/appendix_docu}
 
 \end{document}

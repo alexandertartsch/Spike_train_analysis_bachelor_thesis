@@ -1,0 +1,36 @@
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Pain and Nociception}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Neural Signalling}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{Results}{chapter.1}% 4
+\BOOKMARK [0][-]{chapter.2}{Background}{}% 5
+\BOOKMARK [1][-]{section.2.1}{Data acquisition}{chapter.2}% 6
+\BOOKMARK [2][-]{subsection.2.1.1}{Spike2}{section.2.1}% 7
+\BOOKMARK [2][-]{subsection.2.1.2}{Dapsys}{section.2.1}% 8
+\BOOKMARK [2][-]{subsection.2.1.3}{OpenEphys}{section.2.1}% 9
+\BOOKMARK [1][-]{section.2.2}{Common Spike Train Analysis Methods}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.3}{Spike Train Analysis Tools}{chapter.2}% 11
+\BOOKMARK [2][-]{subsection.2.3.1}{FieldTrip}{section.2.3}% 12
+\BOOKMARK [2][-]{subsection.2.3.2}{Elephant}{section.2.3}% 13
+\BOOKMARK [1][-]{section.2.4}{openMNGlab}{chapter.2}% 14
+\BOOKMARK [2][-]{subsection.2.4.1}{Neo}{section.2.4}% 15
+\BOOKMARK [1][-]{section.2.5}{Experimental Data}{chapter.2}% 16
+\BOOKMARK [0][-]{chapter.3}{Methods}{}% 17
+\BOOKMARK [1][-]{section.3.1}{Software}{chapter.3}% 18
+\BOOKMARK [1][-]{section.3.2}{Spike Train Analysis}{chapter.3}% 19
+\BOOKMARK [2][-]{subsection.3.2.1}{Data}{section.3.2}% 20
+\BOOKMARK [2][-]{subsection.3.2.2}{Spike Train Definition}{section.3.2}% 21
+\BOOKMARK [2][-]{subsection.3.2.3}{Spike Train Analysis: Quantifiers}{section.3.2}% 22
+\BOOKMARK [0][-]{chapter.4}{Results}{}% 23
+\BOOKMARK [1][-]{section.4.1}{Software}{chapter.4}% 24
+\BOOKMARK [2][-]{subsection.4.1.1}{Data Structure}{section.4.1}% 25
+\BOOKMARK [2][-]{subsection.4.1.2}{Development Process}{section.4.1}% 26
+\BOOKMARK [2][-]{subsection.4.1.3}{Use Cases}{section.4.1}% 27
+\BOOKMARK [2][-]{subsection.4.1.4}{Finished Analysis Pipeline}{section.4.1}% 28
+\BOOKMARK [1][-]{section.4.2}{Spike Analysis}{chapter.4}% 29
+\BOOKMARK [2][-]{subsection.4.2.1}{Experimental Protocol}{section.4.2}% 30
+\BOOKMARK [2][-]{subsection.4.2.2}{Sample Analysis}{section.4.2}% 31
+\BOOKMARK [0][-]{chapter.5}{Discussion}{}% 32
+\BOOKMARK [1][-]{section.5.1}{Software}{chapter.5}% 33
+\BOOKMARK [1][-]{section.5.2}{Spike Analysis}{chapter.5}% 34
+\BOOKMARK [0][-]{chapter.6}{Conclusion}{}% 35
+\BOOKMARK [0][-]{chapter.6}{References}{}% 36
