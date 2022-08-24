@@ -1,4 +1,5 @@
 \chapter{Methods}
+\label{methods_chapter}
 %not sure if use-cases should not go into a different chapter\\
 %this chapter would then focus on just the process of developing my analysis pipeline and finish with a detailed description of it.
 %\section{Chapter content}
@@ -21,13 +22,13 @@ TODO:\\
 -adding of neo importers after integration into openMNGlab\\
 \end{comment}
 \section{Software}
-In this thesis recordings of mechanically and electrically stimulated rats were analyzed using the same quantifiers as in the paper by Uebner et al.~\cite{roberto}. This was supposed to be done using the openMNGlab framework~\cite{schlebusch_openmnglab_2021}. The goal was not to provide a fully functioning analysis system as part of this thesis, but rather comment on the process of using openMNGlab and provide ideas for any issues occurring during the analysis. To get a better understanding of openMNGlab, other users of the framework were interviewed to get their perspective.
+In this thesis, recordings of mechanically and electrically stimulated rats were analyzed using the same quantifiers as in the paper by Uebner et al.~\cite{roberto}. This was supposed to be done using the openMNGlab framework~\cite{schlebusch_openmnglab_2021}. The goal was not to provide a fully functioning analysis system as part of this thesis, but rather comment on the process of using openMNGlab and provide ideas for any issues occurring during the analysis. To get a better understanding of openMNGlab, other users of the framework were interviewed to get their perspective.
 This chapter is split in two parts that deal with the software development and spike train analysis respectively.
 
 The first step in the process to understanding the problems with the software was to use the software. Doing so, testing for potential issues was done while also doing work towards the analysis.
 While using the software various different errors and issues of varying size and importance came up.
 After using the software and getting to know the framework for the use case of electrically and mechanically stimulated data,  other users were interviewed about the framework to get an idea of other potential issues with the software that did not appear during the previous work for this thesis.
-This resulted in a comprehensive list of different users needs and issues regarding the software framework. From this point of view solutions and ideas for improvements and development of openMNGlab can be proposed.
+This resulted in a comprehensive list of different users needs and issues regarding the software framework. From this point of view, solutions and ideas for improvements and development of openMNGlab can be proposed.
 
 
 \section{Spike Train Analysis}
@@ -41,15 +42,15 @@ In the case of this thesis, we are using the data from wistar rats. The data was
 The experiments were done in vitro on peripheral nerve fibers. The fibers were mechanically and electrically stimulated via a custom made electromechanostimulator. The nerve activity was recorded using an electrode. The electrical stimulation consists of small electrical pulses that come in a controlled frequency. The mechanical force is applied in a half sinusoidal shape. In the recordings the mechanical force that is applied throughout stays at approximately the same level, but there are exceptions where the mechanical stimulation changes in amplitude and length during one recording. 
 
 \subsection{Spike Train Definition}
-Earlier in this thesis we covered the basics of electrical signals in nerve fibers and action potentials. In this thesis we are, however, not interested in single spikes but in clusters of them. For this it is important to define what we mean when we speak of spike trains.
+Earlier in this thesis, we covered the basics of electrical signals in nerve fibers and action potentials. In this thesis we are, however, not interested in single spikes but in clusters of them. For this it is important to define what we mean when we speak of spike trains.
 
-In theory any number of spikes could be called a spike train. What we are interested in is the short amount of time after a stimulus event where there is increased spiking activity, see figure~\ref{fig:spike_train}. In the data provided by Roberto de Col there is mechanical and electrical stimulation~\cite{roberto}. The mechanical stimulation, which is approximately 250 milliseconds long, leads to noticeably increased spiking activity. It is this spiking activity that we want to analyze and quantify and to have a unified way of speaking about this activity we call these clusters of spikes spike trains. We consider the mechanical stimulus the start of the spike train. This is marked in the event channel of the data. 
+In theory any number of spikes could be called a spike train. What we are interested in is the short amount of time after a stimulus event where there is increased spiking activity, see Figure~\ref{fig:spike_train}. In the data provided by Roberto de Col, there is mechanical and electrical stimulation~\cite{roberto}. The mechanical stimulation, which is approximately 250 milliseconds long, leads to noticeably increased spiking activity. It is this spiking activity that we want to analyze and quantify and to have a unified way of speaking about this activity we call these clusters of spikes spike trains. We consider the mechanical stimulus the start of the spike train. This is marked in the event channel of the data. 
 
 A spike train is considered finished after the increased spiking activity has normalized. For the analysis in this thesis the maximum duration of a spike train is considered to be 500 milliseconds. Each spike occurring within 500 ms of the mechanical stimulus gets counted towards the spike train. The duration of the spike trains in the recordings ranges from 150 milliseconds to 500 milliseconds.
 
 \subsection{Spike Train Analysis: Quantifiers}
 Now that we had a look at the data that we have available, it is time to discuss the quantifiers that are used for the analysis of the data.
-Starting out with raw data the first and perhaps most obvious quantifier that can be computed is the number of spikes in a spike train. It is a basic measure and can give information at a quick glance about the spike train. Of course this is not as expressive as other quantifiers and does not necessarily provide us with much context, but it can give hints at less or more active nerve fibers for example. 
+Starting out with raw data, the first and perhaps most obvious quantifier that can be computed is the number of spikes in a spike train. It is a basic measure and can give information at a quick glance about the spike train. Of course this is not as expressive as other quantifiers and does not necessarily provide us with much context, but it can give hints at less or more active nerve fibers for example. 
 
 Another quantifier mentioned in the literature is the mean firing rate. This is calculated by dividing the duration of the spike train by the number of spikes and gives an idea of the frequency in which the nerve fiber fires at this moment.
 
